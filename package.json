@@ -1,0 +1,14 @@
+{
+  "name": "sprite-generator",
+  "version": "1.0.0",
+  "description": "Agentic sprite generator using OpenAI gpt-image-1. Feed it a manifest of assets and it generates consistent illustrated sprites.",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "generate": "node generate.js",
+    "preview": "node preview.js"
+  },
+  "dependencies": {
+    "openai": "^4.85.0"
+  }
+}
