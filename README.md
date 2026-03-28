@@ -2,79 +2,85 @@
 
 Agentic sprite generator using OpenAI's `gpt-image-1` model. Feed it a JSON manifest of assets and it generates consistent illustrated sprites with retry logic and concurrency control.
 
-## Setup
+## Install
 
 ```bash
-cd tools/sprite-generator
-npm install
+npm install mrpickering/sprite-generator
 ```
 
-## Usage
-
-### 1. Build the manifest from game data
+## Quick Start
 
 ```bash
-node build-manifest.js
+# Create a starter manifest in your project
+npx sprite-generator init
+
+# Edit manifest.json to describe your sprites, then preview prompts
+OPENAI_API_KEY=sk-... npx sprite-generator --dry-run
+
+# Generate all sprites
+OPENAI_API_KEY=sk-... npx sprite-generator
+
+# View results in the browser
+npx sprite-preview
 ```
 
-This scans `cult-empire/gamedata.js` and outputs `manifest.json` with all 370+ assets categorized.
+## CLI Reference
 
-### 2. Generate sprites
+### sprite-generator [init] [options]
 
-```bash
-OPENAI_API_KEY=sk-... node generate.js
-```
+| Option | Default | Description |
+|--------|---------|-------------|
+| `init` | | Create a starter manifest.json in the current directory |
+| `--manifest <path>` | `./manifest.json` | Path to asset manifest JSON |
+| `--output <dir>` | `./output` | Output directory for sprites |
+| `--style <prompt>` | manifest's `defaultStyle` | Override the default style prompt |
+| `--size <WxH>` | `1024x1024` | `1024x1024`, `1024x1536`, `1536x1024`, or `auto` |
+| `--model <name>` | `gpt-image-1` | `gpt-image-1` or `dall-e-3` |
+| `--category <name>` | | Only generate one category |
+| `--skip-existing` | `false` | Skip assets that already have output files |
+| `--concurrency <n>` | `3` | Parallel API requests |
+| `--dry-run` | `false` | Preview prompts without calling the API |
 
-Options:
-- `--manifest <path>` — Path to manifest (default: `./manifest.json`)
-- `--output <dir>` — Output directory (default: `./output`)
-- `--style <prompt>` — Override the default style prompt
-- `--size <WxH>` — `256x256`, `512x512`, or `1024x1024`
-- `--category <name>` — Only generate one category (e.g. `creature`, `dungeon_enemy`)
-- `--skip-existing` — Don't regenerate sprites that already exist
-- `--concurrency <n>` — Parallel API requests (default: 3)
-- `--dry-run` — Preview prompts without calling the API
+### sprite-preview [options]
 
-Example — generate only creatures:
-```bash
-OPENAI_API_KEY=sk-... node generate.js --category creature --skip-existing
-```
-
-### 3. Preview results
-
-```bash
-node preview.js
-# Opens http://localhost:3333
-```
-
-Shows all generated sprites in a grid, grouped by category, with missing assets highlighted.
+| Option | Default | Description |
+|--------|---------|-------------|
+| `--manifest <path>` | `./manifest.json` | Path to manifest JSON |
+| `--output <dir>` | `./output` | Directory with generated sprites |
+| `--port <n>` | `3333` | Server port |
 
 ## Manifest Format
 
 ```json
 {
-  "defaultStyle": "Dark fantasy illustrated sprite...",
+  "defaultStyle": "Illustrated game sprite, transparent background, 256x256, detailed, centered composition, no text",
   "assets": [
     {
-      "id": "imp",
-      "name": "Imp",
-      "emoji": "👿",
-      "category": "creature",
-      "description": "A dark fantasy creature, Imp, menacing, supernatural"
+      "id": "unique_id",
+      "name": "Display Name",
+      "emoji": "🎮",
+      "category": "characters",
+      "description": "Detailed description for the AI prompt",
+      "tags": ["optional", "keywords"]
     }
   ]
 }
 ```
 
-You can add custom `tags` arrays or override `description` per asset for more control.
+- **`defaultStyle`** — Prepended to every asset's prompt. Sets the overall art direction.
+- **`id`** — Unique identifier, used as the filename (`<id>.png`).
+- **`category`** — Groups assets into subdirectories under the output folder.
+- **`description`** — The main prompt content. Be specific about the subject, pose, style.
+- **`tags`** — Optional keywords appended to the prompt.
 
-## Reusing for Other Projects
+## Examples
 
-1. Create a `manifest.json` with your assets
-2. Set `defaultStyle` to match your game's art direction
-3. Run the generator
+See the `examples/` directory for real-world manifests and manifest builders from actual game projects.
 
-The tool is project-agnostic — it just needs a manifest.
+## Requirements
+
+- Node.js 18+
+- OpenAI API key with `gpt-image-1` access
 
 ## License
 

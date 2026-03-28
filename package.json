@@ -4,10 +4,32 @@
   "description": "Agentic sprite generator using OpenAI gpt-image-1. Feed it a manifest of assets and it generates consistent illustrated sprites.",
   "type": "module",
   "license": "MIT",
+  "bin": {
+    "sprite-generator": "./generate.js",
+    "sprite-preview": "./preview.js"
+  },
   "scripts": {
     "generate": "node generate.js",
     "preview": "node preview.js"
   },
+  "files": [
+    "generate.js",
+    "preview.js",
+    "README.md",
+    "LICENSE",
+    "CLAUDE.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrpickering/sprite-generator.git"
+  },
+  "keywords": [
+    "sprite",
+    "generator",
+    "openai",
+    "game-assets",
+    "gpt-image"
+  ],
   "dependencies": {
     "openai": "^4.85.0"
   }

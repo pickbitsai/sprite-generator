@@ -19,7 +19,7 @@
 import fs from 'fs';
 import path from 'path';
 import { parseArgs } from 'util';
-import OpenAI from 'openai';
+// OpenAI is imported dynamically below so that `init` works without deps installed
 
 // ---------------------------------------------------------------------------
 // CLI args
@@ -29,7 +29,7 @@ const { values: args } = parseArgs({
     manifest:       { type: 'string',  default: './manifest.json' },
     output:         { type: 'string',  default: './output' },
     style:          { type: 'string',  default: '' },
-    size:           { type: 'string',  default: '256x256' },
+    size:           { type: 'string',  default: '1024x1024' },
     model:          { type: 'string',  default: 'gpt-image-1' },
     category:       { type: 'string',  default: '' },
     'skip-existing':{ type: 'boolean', default: false },
@@ -37,7 +37,41 @@ const { values: args } = parseArgs({
     'dry-run':      { type: 'boolean', default: false },
   },
   strict: false,
+  allowPositionals: true,
 });
+
+// ---------------------------------------------------------------------------
+// Init subcommand — create a starter manifest
+// ---------------------------------------------------------------------------
+if (process.argv[2] === 'init') {
+  const manifestPath = path.resolve('manifest.json');
+  if (fs.existsSync(manifestPath)) {
+    console.error('manifest.json already exists in this directory. Delete it first to re-init.');
+    process.exit(1);
+  }
+  const starter = {
+    defaultStyle: 'Illustrated game sprite, transparent background, 256x256, detailed, centered composition, no text',
+    assets: [
+      {
+        id: 'example_hero',
+        name: 'Hero',
+        emoji: '\u{1F9B8}',
+        category: 'character',
+        description: 'A heroic character in a standing pose, detailed and vibrant',
+        tags: ['character', 'hero', 'main']
+      }
+    ]
+  };
+  fs.writeFileSync(manifestPath, JSON.stringify(starter, null, 2) + '\n');
+  console.log('Created manifest.json with a starter template.');
+  console.log('');
+  console.log('Next steps:');
+  console.log('  1. Edit manifest.json — add your assets, set your art style');
+  console.log('  2. Preview prompts:  npx sprite-generator --dry-run');
+  console.log('  3. Generate sprites: OPENAI_API_KEY=sk-... npx sprite-generator');
+  console.log('  4. View results:     npx sprite-preview');
+  process.exit(0);
+}
 
 const VALID_SIZES = ['1024x1024', '1024x1536', '1536x1024', 'auto'];
 if (!VALID_SIZES.includes(args.size)) {
@@ -114,6 +148,7 @@ if (!process.env.OPENAI_API_KEY) {
   process.exit(1);
 }
 
+const { default: OpenAI } = await import('openai');
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 // ---------------------------------------------------------------------------
