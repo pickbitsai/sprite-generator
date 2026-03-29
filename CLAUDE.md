@@ -38,10 +38,54 @@ npm install mrpickering/sprite-generator
 }
 ```
 
+## Sprite Sheets (Angles + Animations)
+
+For characters or objects that need multiple views and animation frames, add `angles` and `animations` to the manifest (globally or per asset):
+
+```json
+{
+  "defaultStyle": "Pixel art sprite, transparent background, 64x64",
+  "angles": ["front", "back", "left", "right"],
+  "animations": {
+    "idle": { "frames": 2, "fps": 4 },
+    "walk": { "frames": 4, "fps": 8 }
+  },
+  "assets": [
+    {
+      "id": "hero",
+      "name": "Hero",
+      "emoji": "🦸",
+      "category": "character",
+      "description": "A knight in silver armor with a blue cape",
+      "angles": ["front", "side"],
+      "animations": {
+        "idle": { "frames": 2, "fps": 4 },
+        "walk": { "frames": 4, "fps": 8 },
+        "attack": { "frames": 3, "fps": 10, "frameDescriptions": ["raising sword", "mid-swing", "follow-through"] }
+      }
+    }
+  ]
+}
+```
+
+This generates individual frame PNGs and assembles them into a sprite sheet (`hero-sheet.png`) with metadata (`hero-sheet.json`).
+
+Output structure:
+```
+output/<category>/<id>/frames/<angle>-<animation>-<frame>.png
+output/<category>/<id>/<id>-sheet.png
+output/<category>/<id>/<id>-sheet.json
+```
+
+The metadata JSON includes `frameWidth`, `frameHeight`, `columns`, `rows`, `animations` (with fps), and a `frameMap` array mapping each cell to its angle/animation/frame. Works with Phaser, Godot, Unity, etc.
+
+Use `--no-sheet` to generate individual frames without assembling the sheet.
+
 ## Tips
 
 - `defaultStyle` is the most important field — it controls consistency across all sprites. Be specific about: art style, background (usually "transparent background"), composition, and what to avoid (usually "no text").
 - Asset `description` is combined with `defaultStyle` to form the full prompt. Focus on what makes this asset unique.
 - Start with a small category and `--dry-run` to validate the style before generating everything.
 - Use `--concurrency 5` to speed up large batches (default is 3).
-- Output goes to `./output/<category>/<id>.png` by default.
+- Output goes to `./output/<category>/<id>.png` by default (or `./output/<category>/<id>/` for sprite sheets).
+- Built-in animation phase descriptions exist for: idle, walk, run, attack, jump, death. For custom animations, provide `frameDescriptions` in the manifest.

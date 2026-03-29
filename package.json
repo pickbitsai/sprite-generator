@@ -31,6 +31,7 @@
     "gpt-image"
   ],
   "dependencies": {
-    "openai": "^4.85.0"
+    "openai": "^4.85.0",
+    "sharp": "^0.33.5"
   }
 }
