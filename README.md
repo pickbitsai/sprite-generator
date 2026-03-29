@@ -1,6 +1,6 @@
 # Sprite Generator
 
-Agentic sprite generator using OpenAI's `gpt-image-1` model. Feed it a JSON manifest of assets and it generates consistent illustrated sprites with retry logic and concurrency control.
+Agentic sprite generator using OpenAI's `gpt-image-1` model. Feed it a JSON manifest of assets and it generates consistent illustrated sprites with retry logic and concurrency control. Supports sprite sheets with multiple angles and animation frames.
 
 ## Install
 
@@ -40,6 +40,7 @@ npx sprite-preview
 | `--skip-existing` | `false` | Skip assets that already have output files |
 | `--concurrency <n>` | `3` | Parallel API requests |
 | `--dry-run` | `false` | Preview prompts without calling the API |
+| `--no-sheet` | `false` | Generate individual frames but skip sprite sheet assembly |
 
 ### sprite-preview [options]
 
@@ -51,27 +52,85 @@ npx sprite-preview
 
 ## Manifest Format
 
+### Simple Sprites
+
 ```json
 {
-  "defaultStyle": "Illustrated game sprite, transparent background, 256x256, detailed, centered composition, no text",
+  "defaultStyle": "Illustrated game sprite, transparent background, 256x256, detailed, no text",
   "assets": [
     {
-      "id": "unique_id",
-      "name": "Display Name",
-      "emoji": "🎮",
-      "category": "characters",
-      "description": "Detailed description for the AI prompt",
-      "tags": ["optional", "keywords"]
+      "id": "health_potion",
+      "name": "Health Potion",
+      "emoji": "🧪",
+      "category": "item",
+      "description": "A glowing red potion in a glass flask",
+      "tags": ["item", "consumable", "healing"]
     }
   ]
 }
 ```
 
-- **`defaultStyle`** — Prepended to every asset's prompt. Sets the overall art direction.
-- **`id`** — Unique identifier, used as the filename (`<id>.png`).
-- **`category`** — Groups assets into subdirectories under the output folder.
-- **`description`** — The main prompt content. Be specific about the subject, pose, style.
-- **`tags`** — Optional keywords appended to the prompt.
+Output: `output/item/health_potion.png`
+
+### Sprite Sheets (Angles + Animations)
+
+Add `angles` and `animations` globally or per asset:
+
+```json
+{
+  "defaultStyle": "Pixel art sprite, transparent background, 64x64, retro game style",
+  "angles": ["front", "back", "left", "right"],
+  "animations": {
+    "idle": { "frames": 2, "fps": 4 },
+    "walk": { "frames": 4, "fps": 8 }
+  },
+  "assets": [
+    {
+      "id": "hero",
+      "name": "Hero",
+      "emoji": "🦸",
+      "category": "character",
+      "description": "A knight in silver armor with a blue cape",
+      "angles": ["front", "side"],
+      "animations": {
+        "idle": { "frames": 2, "fps": 4 },
+        "walk": { "frames": 4, "fps": 8 },
+        "attack": {
+          "frames": 3,
+          "fps": 10,
+          "frameDescriptions": ["raising sword", "mid-swing", "follow-through"]
+        }
+      }
+    }
+  ]
+}
+```
+
+Output:
+```
+output/character/hero/
+  frames/
+    front-idle-0.png, front-idle-1.png
+    front-walk-0.png, front-walk-1.png, ...
+    side-idle-0.png, side-idle-1.png
+    ...
+  hero-sheet.png       # assembled sprite sheet
+  hero-sheet.json      # metadata for game engines
+```
+
+The metadata JSON contains `frameWidth`, `frameHeight`, `columns`, `rows`, `animations` (with fps), and a `frameMap` array mapping each grid cell to its angle, animation, and frame index.
+
+### Field Reference
+
+- **`defaultStyle`** — Prepended to every prompt. Sets overall art direction.
+- **`angles`** — Array of view directions (e.g., `["front", "back", "left", "right"]`). Per-asset overrides replace global.
+- **`animations`** — Object keyed by name. Each has `frames` (count), `fps` (playback speed), optional `frameDescriptions`.
+- **`id`** — Unique identifier, used as filename.
+- **`category`** — Groups assets into subdirectories.
+- **`description`** — Main prompt content. Be specific.
+- **`tags`** — Optional keywords appended to prompt.
+
+Built-in animation phase descriptions: `idle`, `walk`, `run`, `attack`, `jump`, `death`. For custom animations, provide `frameDescriptions`.
 
 ## Examples
 
