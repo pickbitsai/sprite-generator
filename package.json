@@ -4,12 +4,34 @@
   "description": "Sprite generation toolkit: manifest-based asset generation, animation frame assembly, identity-locked image editing, and the Street Fury theme pipeline.",
   "type": "module",
   "license": "MIT",
+  "bin": {
+    "sprite-generator": "./generate.js",
+    "sprite-preview": "./preview.js"
+  },
   "scripts": {
     "generate": "node generate.js",
     "preview": "node preview.js",
     "theme": "node street-fury/generate-theme.js",
     "theme:validate": "node street-fury/validate-theme.js"
   },
+  "files": [
+    "generate.js",
+    "preview.js",
+    "README.md",
+    "LICENSE",
+    "CLAUDE.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrpickering/sprite-generator.git"
+  },
+  "keywords": [
+    "sprite",
+    "generator",
+    "openai",
+    "game-assets",
+    "gpt-image"
+  ],
   "dependencies": {
     "@google/genai": "^1.49.0",
     "dotenv": "^17.4.1",
