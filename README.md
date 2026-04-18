@@ -237,6 +237,108 @@ OPENAI_API_KEY=sk-... npx sprite-generator --no-sheet
 | `--output <dir>` | `./output` | Directory with generated sprites |
 | `--port <n>` | `3333` | Server port |
 
+## Reusable Libraries (`lib/`)
+
+Standalone ES modules for common sprite pipeline tasks. Import them into your own scripts:
+
+### idle-variants.js — Programmatic Idle Animation
+
+Generate 1 AI frame, get N animation frames for free via pixel shifting. The same technique 16-bit beat-em-ups used — zero identity drift between frames.
+
+```js
+import { generateIdleVariants } from './lib/idle-variants.js';
+
+// Creates idle_1.png (original), idle_2.png (-2px), idle_3.png (0px), idle_4.png (+1px)
+await generateIdleVariants('idle_1.png', 'output/', 4);
+```
+
+### verify-identity.js — Frame Identity Checking
+
+Catches "4 different people" across animation frames using Normalised Cross-Correlation (NCC). Scores 0-1 where 1 = identical, <0.70 = identity drift.
+
+```js
+import { verifyFrameIdentity } from './lib/verify-identity.js';
+
+const result = await verifyFrameIdentity(['idle_1.png', 'idle_2.png', 'idle_3.png']);
+if (!result.pass) console.log('Identity drift:', result.failures);
+// { pass: false, minNCC: 0.42, failures: ['Identity NCC 0.42 (need ≥0.70)'] }
+```
+
+### assemble-sheet.js — Sprite Sheet Assembly
+
+Pack individual frames into a grid-based sprite sheet with configurable cell size and margins.
+
+```js
+import { assembleSheet, resizeToCell } from './lib/assemble-sheet.js';
+
+const cells = [
+  { buf: await resizeToCell('idle_1.png', 256, 26), row: 0, col: 0 },
+  { buf: await resizeToCell('idle_2.png', 256, 26), row: 0, col: 1 },
+  { buf: await resizeToCell('attack_1.png', 256, 26), row: 1, col: 0 },
+];
+const sheet = await assembleSheet(cells, 2, 4, 256);
+fs.writeFileSync('character.png', sheet);
+```
+
+### clean-bg.js — Background Removal
+
+AI generators ignore "transparent background" prompts. This flood-fills from corners to remove the baked-in background while preserving interior regions.
+
+```js
+import { cleanBackground } from './lib/clean-bg.js';
+await cleanBackground('ai_output.png', 'clean.png', { threshold: 60 });
+```
+
+## Street Fury Theme Pipeline (`street-fury/`)
+
+Full 35-stage generation pipeline for [Street Fury](https://github.com/MrPickering/Turtles) themed variants (e.g., Simpsons, Ninja Turtles). Generates characters, enemies, bosses, backgrounds, and assembles everything into game-ready sprite sheets with automated verification.
+
+### Quick Start
+
+```bash
+# Set GAME_ROOT to the Street Fury project
+export GAME_ROOT=/path/to/Turtles
+
+# Generate a new theme
+npm run theme -- spider_man "Marvel's Spider-Man universe"
+
+# Resume a failed run
+npm run theme -- spider_man --from verify-gameplay
+
+# Validate an existing theme
+npm run theme:validate -- spider_man
+```
+
+### Pipeline Stages
+
+```
+concept → backgrounds → verify-backgrounds → references → characters →
+enemies → bosses → clean-frames → validate-frames → verify-consistency →
+verify-walk-cycle → assemble → verify-sheet-layout → build-config →
+verify-gameplay → verify-enemy-render → verify-boss-render →
+verify-pickups-render → verify-character-select → capture-character-select →
+capture-walks → capture-enemies → capture-bosses → capture-pickups →
+capture-backgrounds → capture-review-sheet → validate
+```
+
+### Key Features
+
+- **Self-healing verification gates** — when a stage fails, the orchestrator reruns upstream fix-it stages automatically before giving up
+- **Programmatic idle frames** — 1 AI frame + 3 pixel-shifted variants (zero drift)
+- **Identity-locked image editing** — Gemini or ComfyUI+IP-Adapter for consistent pose changes
+- **NCC identity verification** — catches visual drift on the character select screen
+- **Review sheet output** — single PNG showing character select + gameplay for visual sign-off
+- **Unified sprite sizing** — role-based target heights with automatic margin compensation for themed cells
+
+### Environment Variables
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `GAME_ROOT` | Yes | Path to the Street Fury game project |
+| `GEMINI_API_KEY` | Yes | Google AI API key for image generation |
+| `IMAGE_EDIT_PROVIDER` | No | `gemini` (default) or `comfyui` |
+| `COMFYUI_URL` | No | ComfyUI server URL for local generation |
+
 ## Examples
 
 See the `examples/` directory for real-world manifests from actual game projects with hundreds of assets.
