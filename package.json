@@ -1,14 +1,20 @@
 {
   "name": "sprite-generator",
-  "version": "1.0.0",
-  "description": "Agentic sprite generator using OpenAI gpt-image-1. Feed it a manifest of assets and it generates consistent illustrated sprites.",
+  "version": "2.0.0",
+  "description": "Sprite generation toolkit: manifest-based asset generation, animation frame assembly, identity-locked image editing, and the Street Fury theme pipeline.",
   "type": "module",
   "license": "MIT",
   "scripts": {
     "generate": "node generate.js",
-    "preview": "node preview.js"
+    "preview": "node preview.js",
+    "theme": "node street-fury/generate-theme.js",
+    "theme:validate": "node street-fury/validate-theme.js"
   },
   "dependencies": {
-    "openai": "^4.85.0"
+    "@google/genai": "^1.49.0",
+    "dotenv": "^17.4.1",
+    "openai": "^4.85.0",
+    "playwright-core": "^1.59.1",
+    "sharp": "^0.34.5"
   }
 }
