@@ -1,0 +1,37 @@
+{
+  "defaultStyle": "Character portrait, cyberpunk aesthetic, dark moody background, facing forward, upper body visible, detailed, stylized illustration, game character select screen art, transparent background, 512x512",
+  "assets": [
+    {
+      "id": "avatar_netrunner",
+      "name": "Netrunner",
+      "emoji": "💻",
+      "category": "player",
+      "description": "A cyberpunk netrunner hacker, hooded jacket with glowing cyan circuit lines, holographic visor over eyes, lean build, mysterious, blue-cyan color scheme, digital particles floating around",
+      "tags": ["hacker", "mage", "cyan", "portrait"]
+    },
+    {
+      "id": "avatar_street_samurai",
+      "name": "Street Samurai",
+      "emoji": "⚔️",
+      "category": "player",
+      "description": "A cyberpunk street samurai warrior, heavy cybernetic augmentations, scarred face, armored chest plate with red accents, muscular build, intense expression, red color scheme, battle-worn",
+      "tags": ["warrior", "tank", "red", "portrait"]
+    },
+    {
+      "id": "avatar_infiltrator",
+      "name": "Infiltrator",
+      "emoji": "🗡️",
+      "category": "player",
+      "description": "A cyberpunk infiltrator assassin, sleek form-fitting stealth suit, half-face mask, one glowing purple cybernetic eye, slim agile build, dangerous aura, purple color scheme, shadows",
+      "tags": ["rogue", "assassin", "purple", "portrait"]
+    },
+    {
+      "id": "avatar_rigger",
+      "name": "Rigger",
+      "emoji": "🤖",
+      "category": "player",
+      "description": "A cyberpunk rigger drone commander, tech goggles on forehead, utility vest covered in tools and wires, mechanical arm, small drone hovering by shoulder, green color scheme, tinkerer vibe",
+      "tags": ["engineer", "drones", "green", "portrait"]
+    }
+  ]
+}

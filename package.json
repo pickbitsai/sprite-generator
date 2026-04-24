@@ -17,13 +17,21 @@
   "files": [
     "generate.js",
     "preview.js",
+    "lib/",
+    "street-fury/",
+    "templates/",
+    "examples/",
     "README.md",
     "LICENSE",
     "CLAUDE.md"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mrpickering/sprite-generator.git"
+    "url": "git+https://github.com/pickbitsai/sprite-generator.git"
+  },
+  "homepage": "https://github.com/pickbitsai/sprite-generator#readme",
+  "bugs": {
+    "url": "https://github.com/pickbitsai/sprite-generator/issues"
   },
   "keywords": [
     "sprite",

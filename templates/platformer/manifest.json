@@ -1,0 +1,85 @@
+{
+  "defaultStyle": "2D side-scrolling platformer sprite, crisp hand-drawn pixel-art style with bold outlines and flat saturated colors, transparent background, single object only, centered composition, no text, no UI, no drop shadow, consistent lighting from upper-left across all assets, 256x256 target size",
+  "assets": [
+    {
+      "id": "hero_idle",
+      "name": "Hero (Idle)",
+      "emoji": "🦸",
+      "category": "character",
+      "description": "A small heroic adventurer facing the camera directly, side profile leaning slightly right (facing right), green tunic, brown boots, red headband, small sword sheathed at hip, friendly determined expression, clearly the player character",
+      "tags": ["player", "hero"]
+    },
+    {
+      "id": "enemy_slime",
+      "name": "Slime",
+      "emoji": "🟢",
+      "category": "enemy",
+      "description": "A small round jelly-blob enemy in translucent lime green, rounded blob shape with two simple black dot eyes and a tiny mouth, cute but menacing, about half the height of the hero",
+      "tags": ["enemy", "basic"]
+    },
+    {
+      "id": "enemy_bat",
+      "name": "Cave Bat",
+      "emoji": "🦇",
+      "category": "enemy",
+      "description": "A small flying bat enemy with spread leathery wings viewed from the side, dark purple body with magenta inner-wing membranes, red glowing eyes, fangs visible",
+      "tags": ["enemy", "flying"]
+    },
+    {
+      "id": "coin",
+      "name": "Gold Coin",
+      "emoji": "🪙",
+      "category": "pickup",
+      "description": "A single gold coin viewed face-on, bright yellow with a star symbol embossed in the center, thin bright rim highlight, clearly the main collectible",
+      "tags": ["pickup", "currency"]
+    },
+    {
+      "id": "heart_pickup",
+      "name": "Heart Pickup",
+      "emoji": "❤️",
+      "category": "pickup",
+      "description": "A classic red heart pickup shape, slightly glossy with a white highlight on the upper left, soft warm outer glow, clearly an extra-life pickup",
+      "tags": ["pickup", "life"]
+    },
+    {
+      "id": "checkpoint_flag",
+      "name": "Checkpoint Flag",
+      "emoji": "🚩",
+      "category": "prop",
+      "description": "A tall brown wooden flagpole with a rippling blue triangular flag near the top, planted in a small stone base, clearly a save-point marker, full object centered vertically",
+      "tags": ["prop", "save"]
+    },
+    {
+      "id": "ground_tile",
+      "name": "Ground Tile",
+      "emoji": "🟫",
+      "category": "tile",
+      "description": "A seamlessly tileable square grass-topped dirt block, bright green grass layer across the top third, brown earth with small pebble details below, designed to tile edge-to-edge in both directions, NOT transparent",
+      "tags": ["tile", "tileable"]
+    },
+    {
+      "id": "platform_tile",
+      "name": "Wood Platform",
+      "emoji": "🟤",
+      "category": "tile",
+      "description": "A seamlessly horizontally-tileable wooden plank platform viewed from the front, warm brown wood grain with darker edges, clearly a floating platform segment, NOT transparent",
+      "tags": ["tile", "tileable"]
+    },
+    {
+      "id": "spike_hazard",
+      "name": "Spike Trap",
+      "emoji": "⚠️",
+      "category": "hazard",
+      "description": "A row of three sharp silver-metal triangular spikes pointing straight up, mounted on a dark grey stone base, ominous clean edges, clearly a hazard",
+      "tags": ["hazard"]
+    },
+    {
+      "id": "bg_hills",
+      "name": "Parallax Hills",
+      "emoji": "⛰️",
+      "category": "background",
+      "description": "A horizontally tileable parallax background strip showing distant rolling green hills against a pale blue sky with a few soft white clouds, painterly but flat, no foreground elements, NOT transparent, designed to tile seamlessly horizontally",
+      "tags": ["background", "tileable"]
+    }
+  ]
+}

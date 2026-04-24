@@ -8,6 +8,7 @@ These are project-specific manifest builders and pre-built manifests from real g
 - **`cat-snack-bar-manifest.json`** — 550+ assets for a cat cafe game
 - **`build-manifest.js`** — Scans cult-empire game data and builds a manifest
 - **`build-cat-manifest.js`** — Scans cat-snack-bar game data and builds a manifest
+- **`netrunner/`** — full directional-animation bundle for a cyberpunk dungeon crawler (4 classes, programmatic manifest builder, and a Gemini-based sheet generator). See `netrunner/README.md`.
 
 ## Notes
 

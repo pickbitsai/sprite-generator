@@ -1,0 +1,12 @@
+{
+  "defaultStyle": "Top-down pixel art building sprite for a GTA2-style game, 256x256, transparent background, detailed rooftop view, cyberpunk urban style, no text, centered composition, game asset",
+  "assets": [
+    {
+      "id": "building_hospital",
+      "name": "Hospital",
+      "emoji": "🏥",
+      "category": "building",
+      "description": "A hospital building seen from above/top-down, white and red color scheme, red cross symbol on the rooftop, ambulance bay entrance, clean medical facility look, cyberpunk urban style"
+    }
+  ]
+}

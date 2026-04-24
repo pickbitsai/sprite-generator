@@ -1,0 +1,93 @@
+{
+  "defaultStyle": "Top-down 2D arcade racing game sprite viewed from directly overhead (bird's-eye view, 90 degrees), clean vector-style illustration with subtle shading, transparent background, single object only, centered composition, no text, no UI, no drop shadow, consistent lighting across all assets, 256x256 target size",
+  "assets": [
+    {
+      "id": "player_car",
+      "name": "Player Car",
+      "emoji": "🚗",
+      "category": "car",
+      "description": "A sleek sports car viewed from directly overhead, nose pointing up, bright blue body with a single white racing stripe down the center, visible windshield and roof, two clearly defined front and rear wheel pairs, clearly the hero car",
+      "tags": ["player"]
+    },
+    {
+      "id": "opponent_red",
+      "name": "Red Opponent",
+      "emoji": "🏎️",
+      "category": "car",
+      "description": "An aggressive muscle car viewed from directly overhead, nose pointing up, bright red body with wide black hood stripes, wider and chunkier than the player car",
+      "tags": ["opponent"]
+    },
+    {
+      "id": "opponent_green",
+      "name": "Green Opponent",
+      "emoji": "🚙",
+      "category": "car",
+      "description": "A compact rally car viewed from directly overhead, nose pointing up, lime green body with matte-black racing number panel on the roof, similar size to the player car",
+      "tags": ["opponent"]
+    },
+    {
+      "id": "opponent_yellow",
+      "name": "Yellow Opponent",
+      "emoji": "🚕",
+      "category": "car",
+      "description": "A long low supercar viewed from directly overhead, nose pointing up, bright canary yellow body with black side-skirts and rear spoiler, noticeably longer than the player car",
+      "tags": ["opponent"]
+    },
+    {
+      "id": "road_straight",
+      "name": "Road Straight",
+      "emoji": "🛣️",
+      "category": "track",
+      "description": "A seamlessly tileable vertical road tile viewed from directly overhead, dark asphalt grey with a single dashed yellow line down the center and solid white edge lines on both sides, designed to tile edge-to-edge vertically, NOT transparent",
+      "tags": ["track", "tileable"]
+    },
+    {
+      "id": "road_curve",
+      "name": "Road Curve",
+      "emoji": "↩️",
+      "category": "track",
+      "description": "A 90-degree corner road tile viewed from directly overhead, dark asphalt grey turning from bottom-entry to right-exit, curved dashed yellow line and solid white edge lines, grass visible in the inner and outer corners, NOT transparent",
+      "tags": ["track"]
+    },
+    {
+      "id": "obstacle_cone",
+      "name": "Traffic Cone",
+      "emoji": "🚧",
+      "category": "obstacle",
+      "description": "A single orange-and-white striped traffic cone viewed from directly overhead, small circular footprint with the tip of the cone pointing up at the camera, clearly a small obstacle",
+      "tags": ["obstacle"]
+    },
+    {
+      "id": "obstacle_barrel",
+      "name": "Oil Barrel",
+      "emoji": "🛢️",
+      "category": "obstacle",
+      "description": "A standard 55-gallon rusty oil barrel viewed from directly overhead, showing the circular top with the rim and a small cap, red-brown rusty colors, clearly a heavy obstacle",
+      "tags": ["obstacle"]
+    },
+    {
+      "id": "pickup_boost",
+      "name": "Nitro Boost",
+      "emoji": "⚡",
+      "category": "pickup",
+      "description": "A small glowing orange lightning-bolt icon inside a soft circular halo, clearly a speed-boost pickup, viewed from overhead",
+      "tags": ["pickup", "boost"]
+    },
+    {
+      "id": "pickup_shield",
+      "name": "Shield Pickup",
+      "emoji": "🛡️",
+      "category": "pickup",
+      "description": "A small glowing blue shield icon inside a soft circular halo, clearly a defensive pickup, viewed from overhead",
+      "tags": ["pickup", "shield"]
+    },
+    {
+      "id": "finish_line",
+      "name": "Finish Line",
+      "emoji": "🏁",
+      "category": "track",
+      "description": "A horizontally tileable black-and-white checkered finish-line strip spanning the width of the road, clearly a finish banner, NOT transparent, designed to tile horizontally",
+      "tags": ["track", "tileable"]
+    }
+  ]
+}

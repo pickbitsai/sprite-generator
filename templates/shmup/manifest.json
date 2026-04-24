@@ -1,0 +1,109 @@
+{
+  "defaultStyle": "2D top-down vertical shoot-em-up sprite, clean retro-pixel illustration with subtle neon rim-light, transparent background, centered composition, single object only, no text, no UI, no shadows under the sprite, consistent cel-shaded rendering across all assets, 256x256 target size",
+  "assets": [
+    {
+      "id": "player_ship",
+      "name": "Player Ship",
+      "emoji": "🚀",
+      "category": "ship",
+      "description": "A sleek single-seat starfighter viewed from directly above, nose pointing up, twin wing-mounted cannons, cyan engine glow at the rear, chrome and dark-navy hull panels, clearly the hero ship",
+      "tags": ["player", "fast", "agile"]
+    },
+    {
+      "id": "enemy_fighter",
+      "name": "Enemy Fighter",
+      "emoji": "👾",
+      "category": "enemy",
+      "description": "A small angular alien interceptor viewed from directly above, nose pointing down (aimed at the player), twin magenta engine pods at the rear, dark metallic purple plating, slightly smaller than the player ship",
+      "tags": ["enemy", "basic", "fast"]
+    },
+    {
+      "id": "enemy_bomber",
+      "name": "Enemy Bomber",
+      "emoji": "🛸",
+      "category": "enemy",
+      "description": "A heavy rounded alien bomber viewed from directly above, nose pointing down, bulbous green bio-metallic hull with armor plating, four engine flames at the rear, noticeably larger and slower-looking than a fighter",
+      "tags": ["enemy", "heavy", "slow"]
+    },
+    {
+      "id": "enemy_scout",
+      "name": "Enemy Scout",
+      "emoji": "🛰️",
+      "category": "enemy",
+      "description": "A tiny fast alien scout drone viewed from directly above, nose pointing down, triangular yellow-orange hull with a single red sensor eye, small single engine flame, clearly the smallest enemy type",
+      "tags": ["enemy", "scout", "fast"]
+    },
+    {
+      "id": "boss_dreadnought",
+      "name": "Boss Dreadnought",
+      "emoji": "💀",
+      "category": "boss",
+      "description": "A massive alien dreadnought viewed from directly above, nose pointing down, huge rectangular hull covered in gun turrets and engine clusters, glowing red core in the center, dark crimson and black armor plating, clearly a boss-scale ship",
+      "tags": ["boss", "heavy"]
+    },
+    {
+      "id": "bullet_player",
+      "name": "Player Bullet",
+      "emoji": "💠",
+      "category": "projectile",
+      "description": "A small vertical cyan energy bolt with a bright white hot core and soft outer glow, oriented vertically, clearly a friendly projectile",
+      "tags": ["projectile", "player"]
+    },
+    {
+      "id": "bullet_enemy",
+      "name": "Enemy Bullet",
+      "emoji": "🔴",
+      "category": "projectile",
+      "description": "A small round magenta-red plasma ball with a darker core and a soft glow, clearly an enemy projectile",
+      "tags": ["projectile", "enemy"]
+    },
+    {
+      "id": "missile",
+      "name": "Homing Missile",
+      "emoji": "🚀",
+      "category": "projectile",
+      "description": "A small vertical missile with a grey body, orange fins, and a bright yellow-white exhaust trail at the rear, oriented vertically, nose up",
+      "tags": ["projectile", "heavy"]
+    },
+    {
+      "id": "explosion",
+      "name": "Explosion",
+      "emoji": "💥",
+      "category": "effect",
+      "description": "A bright circular explosion burst with a white-hot core fading through yellow and orange into an outer ring of dark smoke, symmetrical and centered, clearly a single moment of detonation",
+      "tags": ["effect"]
+    },
+    {
+      "id": "powerup_weapon",
+      "name": "Weapon Powerup",
+      "emoji": "⚡",
+      "category": "pickup",
+      "description": "A small glowing orange cube with a lightning-bolt icon etched on its face, soft outer halo, clearly a collectable powerup",
+      "tags": ["pickup", "weapon"]
+    },
+    {
+      "id": "powerup_shield",
+      "name": "Shield Powerup",
+      "emoji": "🛡️",
+      "category": "pickup",
+      "description": "A small glowing blue cube with a shield icon etched on its face, soft cyan halo, clearly a collectable powerup",
+      "tags": ["pickup", "defense"]
+    },
+    {
+      "id": "powerup_life",
+      "name": "Extra Life",
+      "emoji": "💚",
+      "category": "pickup",
+      "description": "A small glowing green cube with a tiny ship icon etched on its face, soft green halo, clearly a collectable powerup",
+      "tags": ["pickup", "life"]
+    },
+    {
+      "id": "star_bg",
+      "name": "Starfield Background",
+      "emoji": "🌌",
+      "category": "background",
+      "description": "A seamlessly tileable deep-space starfield, dark navy blue background with scattered pinpoint white stars of varying brightness and a few faint nebula wisps, designed to tile vertically without visible seams, NOT transparent",
+      "tags": ["background", "tileable"]
+    }
+  ]
+}

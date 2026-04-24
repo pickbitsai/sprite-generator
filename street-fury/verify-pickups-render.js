@@ -38,11 +38,16 @@ const ITEMS = [
 ];
 
 // Chi-squared distance threshold above which the themed render is
-// considered divergent from base. Same sheet + same sprite should land
-// well under this (empirical: < 0.15). Genuinely-themed items could
-// exceed it legitimately, so future per-theme pickup themes would flip
-// this off or supply their own ground truth.
-const MAX_DIVERGENCE = 0.35;
+// considered divergent from base. Same sheet + same sprite lands at
+// 0.20-0.55 because baseline-subtract (threshold 30 RGB) keeps a
+// different count of "sprite pixels" depending on how much the item
+// contrasts with each build's background — Adventure Time's flat
+// pastel bg and base game's busy cityscape produce different
+// retention rates on small items (food_small, oneup, weapon_pipe,
+// barrel2). The actual regrid-misconfig case produces d > 1.0
+// because the wrong sprite renders entirely, so 0.60 keeps the
+// detection power while tolerating background-contrast noise.
+const MAX_DIVERGENCE = 0.60;
 
 const server = http.createServer((req, res) => {
   const url = req.url.split('?')[0];

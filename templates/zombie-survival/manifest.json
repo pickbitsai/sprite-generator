@@ -1,0 +1,93 @@
+{
+  "defaultStyle": "Top-down 2D twin-stick survival game sprite viewed from directly overhead (bird's-eye view, 90 degrees), gritty illustrated style with muted earthy palette and selective blood-red accents, transparent background, single object only, centered composition, no text, no UI, no drop shadow, consistent lighting across all assets, 256x256 target size",
+  "assets": [
+    {
+      "id": "player_survivor",
+      "name": "Player Survivor",
+      "emoji": "🧍",
+      "category": "character",
+      "description": "A lone survivor viewed from directly overhead, facing up, wearing a brown leather jacket over a grey hoodie, dark tactical pants, visible shoulders and the top of a backpack, holding a pistol with both hands extended forward, clearly the player character",
+      "tags": ["player"]
+    },
+    {
+      "id": "zombie_walker",
+      "name": "Zombie Walker",
+      "emoji": "🧟",
+      "category": "enemy",
+      "description": "A shambling zombie viewed from directly overhead, arms outstretched forward, dingy torn grey clothing, pale rotten skin, streaks of old blood, similar size to the player, clearly the basic zombie variant",
+      "tags": ["enemy", "basic"]
+    },
+    {
+      "id": "zombie_runner",
+      "name": "Zombie Runner",
+      "emoji": "🏃",
+      "category": "enemy",
+      "description": "A lean fast infected runner viewed from directly overhead, thin frame in shredded athletic clothing, one arm swung back mid-stride, slightly smaller and leaner than the walker, clearly a fast-moving variant",
+      "tags": ["enemy", "fast"]
+    },
+    {
+      "id": "zombie_brute",
+      "name": "Zombie Brute",
+      "emoji": "💪",
+      "category": "enemy",
+      "description": "A massive muscular infected brute viewed from directly overhead, huge shoulders, ragged chains of torn hospital gown, one oversized fist raised, visibly larger than the walker and runner, clearly a heavy boss-type enemy",
+      "tags": ["enemy", "heavy"]
+    },
+    {
+      "id": "weapon_pistol",
+      "name": "Pistol Pickup",
+      "emoji": "🔫",
+      "category": "pickup",
+      "description": "A dark metal 9mm pistol viewed from directly overhead, resting flat, barrel pointing up, clearly a ground-loot weapon pickup",
+      "tags": ["pickup", "weapon"]
+    },
+    {
+      "id": "weapon_shotgun",
+      "name": "Shotgun Pickup",
+      "emoji": "🔫",
+      "category": "pickup",
+      "description": "A pump-action shotgun with a wooden stock and dark metal barrel viewed from directly overhead, resting flat, barrel pointing up, noticeably longer than the pistol",
+      "tags": ["pickup", "weapon"]
+    },
+    {
+      "id": "ammo_box",
+      "name": "Ammo Box",
+      "emoji": "📦",
+      "category": "pickup",
+      "description": "A small olive-green metal ammunition crate viewed from directly overhead, showing the latched top with a stenciled bullet icon in yellow, clearly a resource pickup",
+      "tags": ["pickup", "ammo"]
+    },
+    {
+      "id": "medkit",
+      "name": "Medical Kit",
+      "emoji": "⛑️",
+      "category": "pickup",
+      "description": "A white medical kit viewed from directly overhead, showing a bold red cross on the lid, clean latching edges, clearly a healing pickup",
+      "tags": ["pickup", "heal"]
+    },
+    {
+      "id": "blood_splatter",
+      "name": "Blood Splatter",
+      "emoji": "🩸",
+      "category": "effect",
+      "description": "A messy dark crimson blood splatter viewed from directly overhead, irregular pooled center with radial droplets and streaks, semi-transparent edges, clearly a ground-decal effect",
+      "tags": ["effect"]
+    },
+    {
+      "id": "grass_tile",
+      "name": "Grass Tile",
+      "emoji": "🟩",
+      "category": "tile",
+      "description": "A seamlessly tileable square grass ground tile viewed from directly overhead, dry yellowed grass with patches of darker dirt and scattered small rocks, designed to tile edge-to-edge in both directions, NOT transparent",
+      "tags": ["tile", "tileable"]
+    },
+    {
+      "id": "road_tile",
+      "name": "Road Tile",
+      "emoji": "🛣️",
+      "category": "tile",
+      "description": "A seamlessly tileable square cracked asphalt road tile viewed from directly overhead, dark grey with visible cracks, faint yellow paint fragments, scattered pebbles, designed to tile edge-to-edge in both directions, NOT transparent",
+      "tags": ["tile", "tileable"]
+    }
+  ]
+}

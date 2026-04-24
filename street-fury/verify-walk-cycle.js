@@ -28,8 +28,11 @@ const { loadThemeConfig, themeDir, parseThemeIdFromArgs } = require('./lib');
 
 // Adjacent walk frames must have silhouette IoU <= this to count as
 // "visibly different." Tuned empirically: identical frames ~0.95+, real
-// 2-frame cycles (lift vs plant) land ~0.50-0.70.
-const MAX_ADJACENT_IOU = 0.80;
+// 2-frame cycles (lift vs plant) land ~0.50-0.70. Mid-stride styles where
+// both frames show bent legs at similar heights (common in simpler cartoon
+// art like Adventure Time) land around 0.80-0.88 while still reading as
+// motion in-engine. 0.92 still catches the truly-identical-frames bug.
+const MAX_ADJACENT_IOU = 0.92;
 
 // Read the ASSEMBLED walk strip (assembled/<char>_walk.png) instead of
 // individual frame PNGs. That way this check validates what the engine

@@ -12,16 +12,22 @@ Generate game sprites with AI from a JSON manifest. Describe your assets, run th
 ### 1. Install
 
 ```bash
-npm install mrpickering/sprite-generator
+npm install pickbitsai/sprite-generator
 ```
 
 ### 2. Create a manifest
 
+Pick a genre template or start from a basic starter:
+
 ```bash
-npx sprite-generator init
+npx sprite-generator init --list                    # show available templates
+npx sprite-generator init --template shmup          # copy a genre template
+npx sprite-generator init                           # basic 2-asset starter
 ```
 
-This creates a `manifest.json` in your project with a starter template. Open it up — it has two key parts:
+Templates ship with a proof-of-concept screenshot showing the generated sprites rendered in a representative game scene, so you can evaluate the style before committing credits. See [Templates](#templates) below.
+
+This creates a `manifest.json` in your project. Open it up — it has two key parts:
 
 - **`defaultStyle`** — the art direction shared by all your sprites. This is the most important field. Example:
   ```
@@ -339,9 +345,30 @@ capture-backgrounds → capture-review-sheet → validate
 | `IMAGE_EDIT_PROVIDER` | No | `gemini` (default) or `comfyui` |
 | `COMFYUI_URL` | No | ComfyUI server URL for local generation |
 
+## Templates
+
+Genre starter packs. Each one ships with a manifest, a standalone `demo.html` that renders the generated sprites in a representative scene, a `capture.js` Playwright script, and a committed `screenshot.png` proving the pack produces coherent output before you spend a cent.
+
+| Template | Assets | What it covers |
+|---|---|---|
+| [`shmup`](templates/shmup/README.md) | 13 | Top-down vertical shoot-em-up — player, 3 enemy variants, boss, projectiles, pickups, tileable starfield |
+| [`platformer`](templates/platformer/README.md) | 10 | Side-scrolling platformer — hero, slime/bat, pickups, tileable ground, checkpoint, parallax hills |
+| [`racing`](templates/racing/README.md) | 11 | Top-down arcade racer — player car, 3 opponents, road + curve tiles, obstacles, boost/shield, finish line |
+| [`zombie-survival`](templates/zombie-survival/README.md) | 11 | Top-down twin-stick survival — survivor, 3 zombie variants, pistol/shotgun, blood splatter, tileable grass + road |
+| [`tower-defense`](templates/tower-defense/README.md) | 11 | 60° elevation — 3 tower types, 3 creep variants, projectiles, gold, tileable path + grass |
+| [`pixel-puzzle`](templates/pixel-puzzle/README.md) | 10 | Match-3 — 5 gem colors, bomb + rainbow specials, sparkle/burst effects, tileable board cell |
+
+```bash
+npx sprite-generator init --template <name>            # copy the manifest
+OPENAI_API_KEY=sk-... npx sprite-generator              # generate the sprites
+node node_modules/sprite-generator/templates/<name>/capture.js  # rebuild screenshot
+```
+
+Want to make your own template? Copy an existing `templates/<name>/` directory, tweak the manifest, adjust the demo layout, and submit a PR.
+
 ## Examples
 
-See the `examples/` directory for real-world manifests from actual game projects with hundreds of assets.
+See the `examples/` directory for real-world manifests from actual game projects with hundreds of assets (cult-empire dark fantasy, cat-snack-bar cafe sim, netrunner cyberpunk).
 
 ## License
 

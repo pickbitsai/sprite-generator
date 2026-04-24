@@ -1,0 +1,93 @@
+{
+  "defaultStyle": "Top-down 2D tower defense game sprite viewed from an elevated 60-degree angle (not pure overhead, slight perspective so structures have visible height), clean stylized low-poly illustration with bold primary colors and soft rim lighting, transparent background, single object only, centered composition, no text, no UI, no drop shadow, consistent camera angle across all assets, 256x256 target size",
+  "assets": [
+    {
+      "id": "tower_arrow",
+      "name": "Arrow Tower",
+      "emoji": "🏹",
+      "category": "tower",
+      "description": "A tall thin wooden watchtower with a small archer platform on top, brown wood construction with grey stone base, a crossbow-style weapon pointing upward-forward on the platform, clearly the basic arrow tower, reference-scale for other towers",
+      "tags": ["tower", "basic"]
+    },
+    {
+      "id": "tower_cannon",
+      "name": "Cannon Tower",
+      "emoji": "💣",
+      "category": "tower",
+      "description": "A squat heavy stone bunker with a massive black iron cannon barrel mounted on a rotating base on top, dark grey stone walls with bronze accents, clearly wider and more imposing than the arrow tower",
+      "tags": ["tower", "heavy"]
+    },
+    {
+      "id": "tower_magic",
+      "name": "Magic Tower",
+      "emoji": "🔮",
+      "category": "tower",
+      "description": "A tall slim wizard's spire with a pointed blue-tiled roof and a glowing purple crystal floating above the top, white stone walls with magical runic engravings glowing faintly cyan, clearly an arcane tower",
+      "tags": ["tower", "magic"]
+    },
+    {
+      "id": "creep_grunt",
+      "name": "Grunt Creep",
+      "emoji": "👹",
+      "category": "enemy",
+      "description": "A basic orc-like creep standing in place, green skin, rough leather armor, small handaxe, reference-size enemy, clearly the basic wave enemy",
+      "tags": ["enemy", "basic"]
+    },
+    {
+      "id": "creep_fast",
+      "name": "Fast Creep",
+      "emoji": "🐺",
+      "category": "enemy",
+      "description": "A lean feral wolf-like creep crouched low in a running stance, mangy grey fur, glowing yellow eyes, clearly smaller and leaner than the grunt, a fast-moving enemy variant",
+      "tags": ["enemy", "fast"]
+    },
+    {
+      "id": "creep_tank",
+      "name": "Tank Creep",
+      "emoji": "🛡️",
+      "category": "enemy",
+      "description": "A massive armored ogre creep standing in place, dark grey iron plate armor covering most of its huge frame, oversized shield and warhammer, visibly larger than the grunt, clearly a heavy tank-type enemy",
+      "tags": ["enemy", "heavy"]
+    },
+    {
+      "id": "projectile_arrow",
+      "name": "Arrow Projectile",
+      "emoji": "🏹",
+      "category": "projectile",
+      "description": "A single wooden arrow with grey fletching and a steel tip, oriented horizontally, clearly an in-flight arrow projectile",
+      "tags": ["projectile"]
+    },
+    {
+      "id": "projectile_cannonball",
+      "name": "Cannonball",
+      "emoji": "⚫",
+      "category": "projectile",
+      "description": "A solid black iron cannonball with a subtle highlight, clearly a round heavy projectile, small bright spark trailing from the rear",
+      "tags": ["projectile"]
+    },
+    {
+      "id": "gold_coin",
+      "name": "Gold Coin",
+      "emoji": "🪙",
+      "category": "pickup",
+      "description": "A stack of three golden coins viewed from the same elevated angle as the towers, bright yellow with rim highlights, clearly the main currency reward",
+      "tags": ["pickup", "currency"]
+    },
+    {
+      "id": "path_tile",
+      "name": "Path Tile",
+      "emoji": "🟫",
+      "category": "tile",
+      "description": "A seamlessly tileable square dirt path tile viewed from the same elevated 60-degree angle as the towers, warm brown packed earth with scattered small stones and faint footprints, designed to tile edge-to-edge in both directions, NOT transparent",
+      "tags": ["tile", "tileable"]
+    },
+    {
+      "id": "grass_tile",
+      "name": "Grass Tile",
+      "emoji": "🟩",
+      "category": "tile",
+      "description": "A seamlessly tileable square grass terrain tile viewed from the same elevated 60-degree angle as the towers, healthy green grass with subtle texture, designed to tile edge-to-edge in both directions, NOT transparent",
+      "tags": ["tile", "tileable"]
+    }
+  ]
+}

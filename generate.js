@@ -23,6 +23,12 @@ import { parseArgs } from 'util';
 import OpenAI from 'openai';
 import { GoogleGenAI } from '@google/genai';
 
+if (process.argv[2] === 'init') {
+  const { runInit } = await import('./lib/init.js');
+  await runInit(process.argv.slice(3));
+  process.exit(0);
+}
+
 // ---------------------------------------------------------------------------
 // CLI args
 // ---------------------------------------------------------------------------
@@ -31,7 +37,7 @@ const { values: args } = parseArgs({
     manifest:       { type: 'string',  default: './manifest.json' },
     output:         { type: 'string',  default: './output' },
     style:          { type: 'string',  default: '' },
-    size:           { type: 'string',  default: '256x256' },
+    size:           { type: 'string',  default: '1024x1024' },
     model:          { type: 'string',  default: 'gpt-image-1' },
     backend:        { type: 'string',  default: 'openai' },
     seed:           { type: 'string',  default: '' },

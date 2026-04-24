@@ -1,0 +1,599 @@
+{
+  "defaultStyle": "2D illustrated game character sprite, top-down 3/4 view (like Diablo 1 or Gauntlet), solid filled opaque artwork, dark cyberpunk aesthetic, neon accents on dark colors, transparent background, centered composition, clean edges, no text, NOT pixel art, fully rendered and detailed, consistent character proportions, single character only, game animation frame",
+  "assets": [
+    {
+      "id": "rigger_idle_down_01",
+      "name": "rigger idle down 1",
+      "emoji": "🧍",
+      "category": "rigger-full/idle",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. standing idle, arms relaxed at sides, facing toward the camera (south/down direction). Top-down 3/4 perspective. Frame 1 of 3 idle animation.",
+      "tags": [
+        "rigger",
+        "idle",
+        "green",
+        "down"
+      ]
+    },
+    {
+      "id": "rigger_idle_down_02",
+      "name": "rigger idle down 2",
+      "emoji": "🧍",
+      "category": "rigger-full/idle",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. standing idle, slight breathing shift, subtle weight change, facing toward the camera (south/down direction). Top-down 3/4 perspective. Frame 2 of 3 idle animation.",
+      "tags": [
+        "rigger",
+        "idle",
+        "green",
+        "down"
+      ]
+    },
+    {
+      "id": "rigger_idle_down_03",
+      "name": "rigger idle down 3",
+      "emoji": "🧍",
+      "category": "rigger-full/idle",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. standing idle, slight weight shift to other foot, facing toward the camera (south/down direction). Top-down 3/4 perspective. Frame 3 of 3 idle animation.",
+      "tags": [
+        "rigger",
+        "idle",
+        "green",
+        "down"
+      ]
+    },
+    {
+      "id": "rigger_idle_up_01",
+      "name": "rigger idle up 1",
+      "emoji": "🧍",
+      "category": "rigger-full/idle",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels, backpack with antenna and drone dock, mechanical gauntlets, cargo pants and armored boots. standing idle, arms relaxed at sides, facing away from the camera (north/up direction), back visible. Top-down 3/4 perspective. Frame 1 of 3 idle animation.",
+      "tags": [
+        "rigger",
+        "idle",
+        "green",
+        "up"
+      ]
+    },
+    {
+      "id": "rigger_idle_up_02",
+      "name": "rigger idle up 2",
+      "emoji": "🧍",
+      "category": "rigger-full/idle",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels, backpack with antenna and drone dock, mechanical gauntlets, cargo pants and armored boots. standing idle, slight breathing shift, subtle weight change, facing away from the camera (north/up direction), back visible. Top-down 3/4 perspective. Frame 2 of 3 idle animation.",
+      "tags": [
+        "rigger",
+        "idle",
+        "green",
+        "up"
+      ]
+    },
+    {
+      "id": "rigger_idle_up_03",
+      "name": "rigger idle up 3",
+      "emoji": "🧍",
+      "category": "rigger-full/idle",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels, backpack with antenna and drone dock, mechanical gauntlets, cargo pants and armored boots. standing idle, slight weight shift to other foot, facing away from the camera (north/up direction), back visible. Top-down 3/4 perspective. Frame 3 of 3 idle animation.",
+      "tags": [
+        "rigger",
+        "idle",
+        "green",
+        "up"
+      ]
+    },
+    {
+      "id": "rigger_idle_left_01",
+      "name": "rigger idle left 1",
+      "emoji": "🧍",
+      "category": "rigger-full/idle",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. standing idle, arms relaxed at sides, facing left (west direction), side profile visible. Top-down 3/4 perspective. Frame 1 of 3 idle animation.",
+      "tags": [
+        "rigger",
+        "idle",
+        "green",
+        "left"
+      ]
+    },
+    {
+      "id": "rigger_idle_left_02",
+      "name": "rigger idle left 2",
+      "emoji": "🧍",
+      "category": "rigger-full/idle",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. standing idle, slight breathing shift, subtle weight change, facing left (west direction), side profile visible. Top-down 3/4 perspective. Frame 2 of 3 idle animation.",
+      "tags": [
+        "rigger",
+        "idle",
+        "green",
+        "left"
+      ]
+    },
+    {
+      "id": "rigger_idle_left_03",
+      "name": "rigger idle left 3",
+      "emoji": "🧍",
+      "category": "rigger-full/idle",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. standing idle, slight weight shift to other foot, facing left (west direction), side profile visible. Top-down 3/4 perspective. Frame 3 of 3 idle animation.",
+      "tags": [
+        "rigger",
+        "idle",
+        "green",
+        "left"
+      ]
+    },
+    {
+      "id": "rigger_walk_down_01",
+      "name": "rigger walk down 1",
+      "emoji": "🚶",
+      "category": "rigger-full/walk",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. walking, left foot forward mid-stride, arms swinging naturally, facing toward the camera (south/down direction). Top-down 3/4 perspective. Frame 1 of 4 walk animation.",
+      "tags": [
+        "rigger",
+        "walk",
+        "green",
+        "down"
+      ]
+    },
+    {
+      "id": "rigger_walk_down_02",
+      "name": "rigger walk down 2",
+      "emoji": "🚶",
+      "category": "rigger-full/walk",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. walking, feet passing each other mid-stride, upright posture, facing toward the camera (south/down direction). Top-down 3/4 perspective. Frame 2 of 4 walk animation.",
+      "tags": [
+        "rigger",
+        "walk",
+        "green",
+        "down"
+      ]
+    },
+    {
+      "id": "rigger_walk_down_03",
+      "name": "rigger walk down 3",
+      "emoji": "🚶",
+      "category": "rigger-full/walk",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. walking, right foot forward mid-stride, arms swinging naturally, facing toward the camera (south/down direction). Top-down 3/4 perspective. Frame 3 of 4 walk animation.",
+      "tags": [
+        "rigger",
+        "walk",
+        "green",
+        "down"
+      ]
+    },
+    {
+      "id": "rigger_walk_down_04",
+      "name": "rigger walk down 4",
+      "emoji": "🚶",
+      "category": "rigger-full/walk",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. walking, feet together in contact position between steps, facing toward the camera (south/down direction). Top-down 3/4 perspective. Frame 4 of 4 walk animation.",
+      "tags": [
+        "rigger",
+        "walk",
+        "green",
+        "down"
+      ]
+    },
+    {
+      "id": "rigger_walk_up_01",
+      "name": "rigger walk up 1",
+      "emoji": "🚶",
+      "category": "rigger-full/walk",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels, backpack with antenna and drone dock, mechanical gauntlets, cargo pants and armored boots. walking, left foot forward mid-stride, arms swinging naturally, facing away from the camera (north/up direction), back visible. Top-down 3/4 perspective. Frame 1 of 4 walk animation.",
+      "tags": [
+        "rigger",
+        "walk",
+        "green",
+        "up"
+      ]
+    },
+    {
+      "id": "rigger_walk_up_02",
+      "name": "rigger walk up 2",
+      "emoji": "🚶",
+      "category": "rigger-full/walk",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels, backpack with antenna and drone dock, mechanical gauntlets, cargo pants and armored boots. walking, feet passing each other mid-stride, upright posture, facing away from the camera (north/up direction), back visible. Top-down 3/4 perspective. Frame 2 of 4 walk animation.",
+      "tags": [
+        "rigger",
+        "walk",
+        "green",
+        "up"
+      ]
+    },
+    {
+      "id": "rigger_walk_up_03",
+      "name": "rigger walk up 3",
+      "emoji": "🚶",
+      "category": "rigger-full/walk",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels, backpack with antenna and drone dock, mechanical gauntlets, cargo pants and armored boots. walking, right foot forward mid-stride, arms swinging naturally, facing away from the camera (north/up direction), back visible. Top-down 3/4 perspective. Frame 3 of 4 walk animation.",
+      "tags": [
+        "rigger",
+        "walk",
+        "green",
+        "up"
+      ]
+    },
+    {
+      "id": "rigger_walk_up_04",
+      "name": "rigger walk up 4",
+      "emoji": "🚶",
+      "category": "rigger-full/walk",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels, backpack with antenna and drone dock, mechanical gauntlets, cargo pants and armored boots. walking, feet together in contact position between steps, facing away from the camera (north/up direction), back visible. Top-down 3/4 perspective. Frame 4 of 4 walk animation.",
+      "tags": [
+        "rigger",
+        "walk",
+        "green",
+        "up"
+      ]
+    },
+    {
+      "id": "rigger_walk_left_01",
+      "name": "rigger walk left 1",
+      "emoji": "🚶",
+      "category": "rigger-full/walk",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. walking, left foot forward mid-stride, arms swinging naturally, facing left (west direction), side profile visible. Top-down 3/4 perspective. Frame 1 of 4 walk animation.",
+      "tags": [
+        "rigger",
+        "walk",
+        "green",
+        "left"
+      ]
+    },
+    {
+      "id": "rigger_walk_left_02",
+      "name": "rigger walk left 2",
+      "emoji": "🚶",
+      "category": "rigger-full/walk",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. walking, feet passing each other mid-stride, upright posture, facing left (west direction), side profile visible. Top-down 3/4 perspective. Frame 2 of 4 walk animation.",
+      "tags": [
+        "rigger",
+        "walk",
+        "green",
+        "left"
+      ]
+    },
+    {
+      "id": "rigger_walk_left_03",
+      "name": "rigger walk left 3",
+      "emoji": "🚶",
+      "category": "rigger-full/walk",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. walking, right foot forward mid-stride, arms swinging naturally, facing left (west direction), side profile visible. Top-down 3/4 perspective. Frame 3 of 4 walk animation.",
+      "tags": [
+        "rigger",
+        "walk",
+        "green",
+        "left"
+      ]
+    },
+    {
+      "id": "rigger_walk_left_04",
+      "name": "rigger walk left 4",
+      "emoji": "🚶",
+      "category": "rigger-full/walk",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. walking, feet together in contact position between steps, facing left (west direction), side profile visible. Top-down 3/4 perspective. Frame 4 of 4 walk animation.",
+      "tags": [
+        "rigger",
+        "walk",
+        "green",
+        "left"
+      ]
+    },
+    {
+      "id": "rigger_attack_down_01",
+      "name": "rigger attack down 1",
+      "emoji": "⚡",
+      "category": "rigger-full/attack",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. raising wrist-mounted pulse cannon to attack, winding up, facing toward the camera (south/down direction). Top-down 3/4 perspective. Frame 1 of 3 attack animation.",
+      "tags": [
+        "rigger",
+        "attack",
+        "green",
+        "down"
+      ]
+    },
+    {
+      "id": "rigger_attack_down_02",
+      "name": "rigger attack down 2",
+      "emoji": "⚡",
+      "category": "rigger-full/attack",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. firing wrist-mounted pulse cannon, green energy blast, mid-strike, facing toward the camera (south/down direction). Top-down 3/4 perspective. Frame 2 of 3 attack animation.",
+      "tags": [
+        "rigger",
+        "attack",
+        "green",
+        "down"
+      ]
+    },
+    {
+      "id": "rigger_attack_down_03",
+      "name": "rigger attack down 3",
+      "emoji": "⚡",
+      "category": "rigger-full/attack",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. follow-through after attack, recovering to ready stance, facing toward the camera (south/down direction). Top-down 3/4 perspective. Frame 3 of 3 attack animation.",
+      "tags": [
+        "rigger",
+        "attack",
+        "green",
+        "down"
+      ]
+    },
+    {
+      "id": "rigger_attack_up_01",
+      "name": "rigger attack up 1",
+      "emoji": "⚡",
+      "category": "rigger-full/attack",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels, backpack with antenna and drone dock, mechanical gauntlets, cargo pants and armored boots. raising wrist-mounted pulse cannon to attack, winding up, facing away from the camera (north/up direction), back visible. Top-down 3/4 perspective. Frame 1 of 3 attack animation.",
+      "tags": [
+        "rigger",
+        "attack",
+        "green",
+        "up"
+      ]
+    },
+    {
+      "id": "rigger_attack_up_02",
+      "name": "rigger attack up 2",
+      "emoji": "⚡",
+      "category": "rigger-full/attack",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels, backpack with antenna and drone dock, mechanical gauntlets, cargo pants and armored boots. firing wrist-mounted pulse cannon, green energy blast, mid-strike, facing away from the camera (north/up direction), back visible. Top-down 3/4 perspective. Frame 2 of 3 attack animation.",
+      "tags": [
+        "rigger",
+        "attack",
+        "green",
+        "up"
+      ]
+    },
+    {
+      "id": "rigger_attack_up_03",
+      "name": "rigger attack up 3",
+      "emoji": "⚡",
+      "category": "rigger-full/attack",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels, backpack with antenna and drone dock, mechanical gauntlets, cargo pants and armored boots. follow-through after attack, recovering to ready stance, facing away from the camera (north/up direction), back visible. Top-down 3/4 perspective. Frame 3 of 3 attack animation.",
+      "tags": [
+        "rigger",
+        "attack",
+        "green",
+        "up"
+      ]
+    },
+    {
+      "id": "rigger_attack_left_01",
+      "name": "rigger attack left 1",
+      "emoji": "⚡",
+      "category": "rigger-full/attack",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. raising wrist-mounted pulse cannon to attack, winding up, facing left (west direction), side profile visible. Top-down 3/4 perspective. Frame 1 of 3 attack animation.",
+      "tags": [
+        "rigger",
+        "attack",
+        "green",
+        "left"
+      ]
+    },
+    {
+      "id": "rigger_attack_left_02",
+      "name": "rigger attack left 2",
+      "emoji": "⚡",
+      "category": "rigger-full/attack",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. firing wrist-mounted pulse cannon, green energy blast, mid-strike, facing left (west direction), side profile visible. Top-down 3/4 perspective. Frame 2 of 3 attack animation.",
+      "tags": [
+        "rigger",
+        "attack",
+        "green",
+        "left"
+      ]
+    },
+    {
+      "id": "rigger_attack_left_03",
+      "name": "rigger attack left 3",
+      "emoji": "⚡",
+      "category": "rigger-full/attack",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. follow-through after attack, recovering to ready stance, facing left (west direction), side profile visible. Top-down 3/4 perspective. Frame 3 of 3 attack animation.",
+      "tags": [
+        "rigger",
+        "attack",
+        "green",
+        "left"
+      ]
+    },
+    {
+      "id": "rigger_dash_down_01",
+      "name": "rigger dash down 1",
+      "emoji": "💨",
+      "category": "rigger-full/dash",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. body leaning forward aggressively into a burst of speed, green thruster exhaust trail beginning, facing toward the camera (south/down direction). Top-down 3/4 perspective. Frame 1 of 2 dash animation.",
+      "tags": [
+        "rigger",
+        "dash",
+        "green",
+        "down"
+      ]
+    },
+    {
+      "id": "rigger_dash_down_02",
+      "name": "rigger dash down 2",
+      "emoji": "💨",
+      "category": "rigger-full/dash",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. mid-dash lunging forward at high speed, green thruster exhaust trail behind, facing toward the camera (south/down direction). Top-down 3/4 perspective. Frame 2 of 2 dash animation.",
+      "tags": [
+        "rigger",
+        "dash",
+        "green",
+        "down"
+      ]
+    },
+    {
+      "id": "rigger_dash_up_01",
+      "name": "rigger dash up 1",
+      "emoji": "💨",
+      "category": "rigger-full/dash",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels, backpack with antenna and drone dock, mechanical gauntlets, cargo pants and armored boots. body leaning forward aggressively into a burst of speed, green thruster exhaust trail beginning, facing away from the camera (north/up direction), back visible. Top-down 3/4 perspective. Frame 1 of 2 dash animation.",
+      "tags": [
+        "rigger",
+        "dash",
+        "green",
+        "up"
+      ]
+    },
+    {
+      "id": "rigger_dash_up_02",
+      "name": "rigger dash up 2",
+      "emoji": "💨",
+      "category": "rigger-full/dash",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels, backpack with antenna and drone dock, mechanical gauntlets, cargo pants and armored boots. mid-dash lunging forward at high speed, green thruster exhaust trail behind, facing away from the camera (north/up direction), back visible. Top-down 3/4 perspective. Frame 2 of 2 dash animation.",
+      "tags": [
+        "rigger",
+        "dash",
+        "green",
+        "up"
+      ]
+    },
+    {
+      "id": "rigger_dash_left_01",
+      "name": "rigger dash left 1",
+      "emoji": "💨",
+      "category": "rigger-full/dash",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. body leaning forward aggressively into a burst of speed, green thruster exhaust trail beginning, facing left (west direction), side profile visible. Top-down 3/4 perspective. Frame 1 of 2 dash animation.",
+      "tags": [
+        "rigger",
+        "dash",
+        "green",
+        "left"
+      ]
+    },
+    {
+      "id": "rigger_dash_left_02",
+      "name": "rigger dash left 2",
+      "emoji": "💨",
+      "category": "rigger-full/dash",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. mid-dash lunging forward at high speed, green thruster exhaust trail behind, facing left (west direction), side profile visible. Top-down 3/4 perspective. Frame 2 of 2 dash animation.",
+      "tags": [
+        "rigger",
+        "dash",
+        "green",
+        "left"
+      ]
+    },
+    {
+      "id": "rigger_hurt_down_01",
+      "name": "rigger hurt down 1",
+      "emoji": "💥",
+      "category": "rigger-full/hurt",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. flinching from damage, body recoiling from impact, pain reaction, facing toward the camera (south/down direction). Top-down 3/4 perspective. Frame 1 of 2 hurt animation.",
+      "tags": [
+        "rigger",
+        "hurt",
+        "green",
+        "down"
+      ]
+    },
+    {
+      "id": "rigger_hurt_down_02",
+      "name": "rigger hurt down 2",
+      "emoji": "💥",
+      "category": "rigger-full/hurt",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. staggering from hit, arms out for balance, recovering from blow, facing toward the camera (south/down direction). Top-down 3/4 perspective. Frame 2 of 2 hurt animation.",
+      "tags": [
+        "rigger",
+        "hurt",
+        "green",
+        "down"
+      ]
+    },
+    {
+      "id": "rigger_hurt_up_01",
+      "name": "rigger hurt up 1",
+      "emoji": "💥",
+      "category": "rigger-full/hurt",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels, backpack with antenna and drone dock, mechanical gauntlets, cargo pants and armored boots. flinching from damage, body recoiling from impact, pain reaction, facing away from the camera (north/up direction), back visible. Top-down 3/4 perspective. Frame 1 of 2 hurt animation.",
+      "tags": [
+        "rigger",
+        "hurt",
+        "green",
+        "up"
+      ]
+    },
+    {
+      "id": "rigger_hurt_up_02",
+      "name": "rigger hurt up 2",
+      "emoji": "💥",
+      "category": "rigger-full/hurt",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels, backpack with antenna and drone dock, mechanical gauntlets, cargo pants and armored boots. staggering from hit, arms out for balance, recovering from blow, facing away from the camera (north/up direction), back visible. Top-down 3/4 perspective. Frame 2 of 2 hurt animation.",
+      "tags": [
+        "rigger",
+        "hurt",
+        "green",
+        "up"
+      ]
+    },
+    {
+      "id": "rigger_hurt_left_01",
+      "name": "rigger hurt left 1",
+      "emoji": "💥",
+      "category": "rigger-full/hurt",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. flinching from damage, body recoiling from impact, pain reaction, facing left (west direction), side profile visible. Top-down 3/4 perspective. Frame 1 of 2 hurt animation.",
+      "tags": [
+        "rigger",
+        "hurt",
+        "green",
+        "left"
+      ]
+    },
+    {
+      "id": "rigger_hurt_left_02",
+      "name": "rigger hurt left 2",
+      "emoji": "💥",
+      "category": "rigger-full/hurt",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. staggering from hit, arms out for balance, recovering from blow, facing left (west direction), side profile visible. Top-down 3/4 perspective. Frame 2 of 2 hurt animation.",
+      "tags": [
+        "rigger",
+        "hurt",
+        "green",
+        "left"
+      ]
+    },
+    {
+      "id": "rigger_death_01",
+      "name": "rigger death 1",
+      "emoji": "💀",
+      "category": "rigger-full/death",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. collapsing, knees buckling, beginning to fall, viewed from above. Top-down 3/4 perspective. Frame 1 of 4 death animation.",
+      "tags": [
+        "rigger",
+        "death",
+        "green"
+      ]
+    },
+    {
+      "id": "rigger_death_02",
+      "name": "rigger death 2",
+      "emoji": "💀",
+      "category": "rigger-full/death",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. falling sideways, halfway to the ground, arms going limp, viewed from above. Top-down 3/4 perspective. Frame 2 of 4 death animation.",
+      "tags": [
+        "rigger",
+        "death",
+        "green"
+      ]
+    },
+    {
+      "id": "rigger_death_03",
+      "name": "rigger death 3",
+      "emoji": "💀",
+      "category": "rigger-full/death",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. nearly on the ground, crumpled, green tech panels going dark, shoulder drone falling to the ground, viewed from above. Top-down 3/4 perspective. Frame 3 of 4 death animation.",
+      "tags": [
+        "rigger",
+        "death",
+        "green"
+      ]
+    },
+    {
+      "id": "rigger_death_04",
+      "name": "rigger death 4",
+      "emoji": "💀",
+      "category": "rigger-full/death",
+      "description": "A cyberpunk drone commander character, stocky build, heavy utility coat with glowing green tech panels and tool pouches, bulky goggles with green HUD lens, mechanical gauntlets, cargo pants and armored boots, small drone hovering near shoulder. lying on the ground motionless, sprawled out, all lights dark and off, viewed from above. Top-down 3/4 perspective. Frame 4 of 4 death animation.",
+      "tags": [
+        "rigger",
+        "death",
+        "green"
+      ]
+    }
+  ]
+}

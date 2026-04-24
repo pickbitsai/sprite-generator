@@ -1,0 +1,85 @@
+{
+  "defaultStyle": "2D match-3 puzzle game piece, glossy jewel-style illustration with a bright highlight on the upper-left and soft inner shadow on the lower-right, transparent background, single object only, centered composition, no text, no UI, no drop shadow, consistent gem shape across matching pieces so they read as one set, 256x256 target size",
+  "assets": [
+    {
+      "id": "gem_red",
+      "name": "Ruby Gem",
+      "emoji": "🔴",
+      "category": "gem",
+      "description": "A faceted red ruby cut in a rounded square shape, deep crimson core transitioning to bright pink highlight on the upper-left, clearly a match-3 piece, reference gem shape for the whole set",
+      "tags": ["gem"]
+    },
+    {
+      "id": "gem_blue",
+      "name": "Sapphire Gem",
+      "emoji": "🔵",
+      "category": "gem",
+      "description": "A faceted blue sapphire cut in the same rounded square shape as the ruby, deep royal blue core transitioning to bright cyan highlight on the upper-left, clearly the blue piece of the match-3 set",
+      "tags": ["gem"]
+    },
+    {
+      "id": "gem_green",
+      "name": "Emerald Gem",
+      "emoji": "🟢",
+      "category": "gem",
+      "description": "A faceted green emerald cut in the same rounded square shape as the ruby, rich forest-green core transitioning to bright lime highlight on the upper-left, clearly the green piece of the match-3 set",
+      "tags": ["gem"]
+    },
+    {
+      "id": "gem_yellow",
+      "name": "Topaz Gem",
+      "emoji": "🟡",
+      "category": "gem",
+      "description": "A faceted yellow topaz cut in the same rounded square shape as the ruby, warm amber core transitioning to pale yellow highlight on the upper-left, clearly the yellow piece of the match-3 set",
+      "tags": ["gem"]
+    },
+    {
+      "id": "gem_purple",
+      "name": "Amethyst Gem",
+      "emoji": "🟣",
+      "category": "gem",
+      "description": "A faceted purple amethyst cut in the same rounded square shape as the ruby, deep violet core transitioning to bright lavender highlight on the upper-left, clearly the purple piece of the match-3 set",
+      "tags": ["gem"]
+    },
+    {
+      "id": "gem_bomb",
+      "name": "Bomb Gem",
+      "emoji": "💣",
+      "category": "special",
+      "description": "A dark metallic sphere with a lit orange-yellow fuse on top, subtle glossy highlight on the upper-left, rendered in the same jewel-piece footprint as the gems, clearly a special explosive piece",
+      "tags": ["gem", "special"]
+    },
+    {
+      "id": "gem_rainbow",
+      "name": "Rainbow Gem",
+      "emoji": "🌈",
+      "category": "special",
+      "description": "A faceted rainbow gem cut in the same rounded square shape as the other gems, iridescent surface cycling through red, orange, yellow, green, blue, violet, clearly a wildcard piece",
+      "tags": ["gem", "special"]
+    },
+    {
+      "id": "sparkle_effect",
+      "name": "Sparkle Effect",
+      "emoji": "✨",
+      "category": "effect",
+      "description": "A bright four-pointed star sparkle burst with a white-hot center, radiating beams of pale yellow light, semi-transparent soft outer glow, clearly a match-success visual effect",
+      "tags": ["effect"]
+    },
+    {
+      "id": "clear_burst",
+      "name": "Clear Burst",
+      "emoji": "💥",
+      "category": "effect",
+      "description": "A small circular energy explosion burst in pale cyan and white, radial shockwave rings, semi-transparent edges, clearly a gem-clearing effect",
+      "tags": ["effect"]
+    },
+    {
+      "id": "board_tile",
+      "name": "Board Cell",
+      "emoji": "⬜",
+      "category": "tile",
+      "description": "A seamlessly tileable square board cell, subtle dark blue-purple gradient with a faint inset border suggesting a grid cell, very low contrast so gems placed on it stand out, NOT transparent, designed to tile edge-to-edge in both directions",
+      "tags": ["tile", "tileable"]
+    }
+  ]
+}
