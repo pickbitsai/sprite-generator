@@ -1,6 +1,6 @@
 /**
  * Stage 1: Concept generation.
- * Takes a theme prompt like "simpsons" or "spider-man" and uses Gemini to derive
+ * Takes a theme prompt (e.g. "neon_samurai") and uses Gemini to derive
  * a structured theme config: 4 characters, 3 levels, 5 enemy types, 3 bosses.
  *
  * Usage:  node tools/theme/concept.js <theme-id> [free-form prompt...]

@@ -6,7 +6,7 @@
  *
  * Usage:
  *   node tools/theme/capture-enemies.js            # base game
- *   node tools/theme/capture-enemies.js simpsons
+ *   node tools/theme/capture-enemies.js neon_samurai
  *
  * Output:
  *   test-screenshots/enemies-<theme|base>-<type>-<state>.png

@@ -5,7 +5,7 @@ This is an npm package for generating game sprites using OpenAI's image models. 
 ## Installation
 
 ```bash
-npm install mrpickering/sprite-generator
+npm install pickbitsai/sprite-generator
 ```
 
 ## Workflow

@@ -7,7 +7,7 @@
  *
  * Usage:
  *   node tools/theme/capture-bosses.js            # base
- *   node tools/theme/capture-bosses.js simpsons
+ *   node tools/theme/capture-bosses.js neon_samurai
  *
  * Output:
  *   test-screenshots/bosses-<theme|base>-<type>-<state>.png

@@ -295,24 +295,26 @@ import { cleanBackground } from './lib/clean-bg.js';
 await cleanBackground('ai_output.png', 'clean.png', { threshold: 60 });
 ```
 
-## Street Fury Theme Pipeline (`street-fury/`)
+## Theme Pipeline (`street-fury/`)
 
-Full 35-stage generation pipeline for [Street Fury](https://github.com/MrPickering/Turtles) themed variants (e.g., Simpsons, Ninja Turtles). Generates characters, enemies, bosses, backgrounds, and assembles everything into game-ready sprite sheets with automated verification.
+A 35-stage pipeline for reskinning a base beat-em-up into a new visual theme. You supply (1) a short description of the theme in your own words and (2) your existing character reference sheets; the pipeline re-renders characters, enemies, bosses, and backgrounds in that theme while keeping the gameplay geometry identical. Generated art is driven entirely by your prompt + your reference art — no franchise art is ingested.
+
+The pipeline was built against a specific base game layout, so `GAME_ROOT` must point at a project structured the same way (characters + enemies + bosses + backgrounds in known directories). Most sprite-generator users will not need this — stick with `npx sprite-generator` for text-only asset packs.
 
 ### Quick Start
 
 ```bash
-# Set GAME_ROOT to the Street Fury project
-export GAME_ROOT=/path/to/Turtles
+# Point GAME_ROOT at a base game with the expected directory layout
+export GAME_ROOT=/path/to/base-game
 
-# Generate a new theme
-npm run theme -- spider_man "Marvel's Spider-Man universe"
+# Generate a new theme — describe it in your own words, any theme name you like
+npm run theme -- neon_samurai "A cyberpunk Edo city with chrome katanas and neon rain"
 
 # Resume a failed run
-npm run theme -- spider_man --from verify-gameplay
+npm run theme -- neon_samurai --from verify-gameplay
 
 # Validate an existing theme
-npm run theme:validate -- spider_man
+npm run theme:validate -- neon_samurai
 ```
 
 ### Pipeline Stages
@@ -340,7 +342,7 @@ capture-backgrounds → capture-review-sheet → validate
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `GAME_ROOT` | Yes | Path to the Street Fury game project |
+| `GAME_ROOT` | Yes | Path to the base game project |
 | `GEMINI_API_KEY` | Yes | Google AI API key for image generation |
 | `IMAGE_EDIT_PROVIDER` | No | `gemini` (default) or `comfyui` |
 | `COMFYUI_URL` | No | ComfyUI server URL for local generation |

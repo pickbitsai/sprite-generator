@@ -2,9 +2,10 @@
 const fs = require('fs');
 const path = require('path');
 
-// Game root: when running from the Turtles project, __dirname is tools/theme/
-// and ROOT is two levels up. When running from sprite-generator, set GAME_ROOT
-// env var to point at the game project (e.g. C:\new\Turtles).
+// Game root: when these scripts live under a base game project at
+// tools/theme/, ROOT is two levels up. When running from sprite-generator
+// as a standalone package, set GAME_ROOT env var to point at the base
+// game project.
 const ROOT = process.env.GAME_ROOT || path.join(__dirname, '..', '..');
 
 function loadEnv() {

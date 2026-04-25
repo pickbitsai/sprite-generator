@@ -1,13 +1,16 @@
 // Single-frame smoke test for the ComfyUI integration. Picks an existing
-// simpsons character frame as a reference and asks ComfyUI for a new pose
+// themed character frame as a reference and asks ComfyUI for a new pose
 // via IP-Adapter. Proves the upload → workflow → poll → download loop works
-// end-to-end before we commit to a full theme run.
+// end-to-end before we commit to a full theme run. Set SMOKE_THEME /
+// SMOKE_CHAR to point at any existing themed frame in src/themes/.
 const fs = require('fs');
 const path = require('path');
 const { callComfyUI } = require('./lib');
 
 async function main() {
-  const ref = path.join(__dirname, '..', '..', 'src', 'themes', 'simpsons', 'chars', 'homer_simpson', 'anim', 'idle_1.png');
+  const themeId = process.env.SMOKE_THEME || 'base';
+  const charId = process.env.SMOKE_CHAR || 'player_1';
+  const ref = path.join(__dirname, '..', '..', 'src', 'themes', themeId, 'chars', charId, 'anim', 'idle_1.png');
   const out = path.join(__dirname, '..', '..', 'test-screenshots', 'comfyui-smoke.png');
   if (!fs.existsSync(ref)) throw new Error(`missing reference: ${ref}`);
   fs.mkdirSync(path.dirname(out), { recursive: true });

@@ -9,7 +9,7 @@
  *
  * Usage:
  *   node tools/theme/capture-character-moves.js            # base
- *   node tools/theme/capture-character-moves.js simpsons
+ *   node tools/theme/capture-character-moves.js neon_samurai
  *
  * Output:
  *   test-screenshots/character-moves-<theme|base>-<char>-<state>-f<N>.png

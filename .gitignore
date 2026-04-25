@@ -1,5 +1,8 @@
 node_modules/
 output/
+output-*-proof/
 .env
 .env.*
 !.env.example
+.claude/
+*.tgz

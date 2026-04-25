@@ -12,7 +12,7 @@
  *
  * Usage:
  *   node tools/theme/capture-walks.js            # base game (no theme)
- *   node tools/theme/capture-walks.js simpsons   # themed
+ *   node tools/theme/capture-walks.js neon_samurai   # themed
  *
  * Output:
  *   test-screenshots/walks-<theme|base>-<charIndex>-<charName>-f{0,1}.png

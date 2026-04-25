@@ -10,7 +10,7 @@
  *
  * Usage:
  *   node tools/theme/capture-backgrounds.js            # base
- *   node tools/theme/capture-backgrounds.js simpsons
+ *   node tools/theme/capture-backgrounds.js neon_samurai
  *
  * Output:
  *   test-screenshots/backgrounds-<theme|base>-grid.png

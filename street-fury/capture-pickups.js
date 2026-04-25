@@ -7,7 +7,7 @@
  *
  * Usage:
  *   node tools/theme/capture-pickups.js            # base
- *   node tools/theme/capture-pickups.js simpsons
+ *   node tools/theme/capture-pickups.js neon_samurai
  *
  * Output:
  *   test-screenshots/pickups-<theme|base>-<type>.png

@@ -10,7 +10,7 @@
  *
  * Usage:
  *   node tools/theme/capture-review-sheet.js            # base
- *   node tools/theme/capture-review-sheet.js simpsons
+ *   node tools/theme/capture-review-sheet.js neon_samurai
  *
  * Output:
  *   test-screenshots/review-<theme|base>-sheet.png
