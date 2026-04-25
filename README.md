@@ -368,10 +368,6 @@ node node_modules/sprite-generator/templates/<name>/capture.js  # rebuild screen
 
 Want to make your own template? Copy an existing `templates/<name>/` directory, tweak the manifest, adjust the demo layout, and submit a PR.
 
-## Examples
-
-See the `examples/` directory for real-world manifests from actual game projects with hundreds of assets (cult-empire dark fantasy, cat-snack-bar cafe sim, netrunner cyberpunk).
-
 ## License
 
 MIT
