@@ -29,6 +29,12 @@ if (process.argv[2] === 'init') {
   process.exit(0);
 }
 
+if (process.argv[2] === 'pack') {
+  const { runPackCli } = await import('./lib/pack-cli.js');
+  await runPackCli(process.argv.slice(3));
+  process.exit(0);
+}
+
 // ---------------------------------------------------------------------------
 // CLI args
 // ---------------------------------------------------------------------------
