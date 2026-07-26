@@ -1,0 +1,111 @@
+{
+  "$schema": "./contracts/loop-manifest.schema.json",
+  "schema_version": "0.1",
+  "id": "sprite-production-loop",
+  "title": "Manifest-to-render-proof sprite loop",
+  "intent": "Turn an approved visual contract into game-ready sprite assets without treating provider success or file existence as visual proof.",
+  "nodes": [
+    {
+      "id": "manifest",
+      "kind": "operator",
+      "description": "Define style, assets, target dimensions, anchors, poses, and provider limits.",
+      "artifacts": ["manifest.json or game-pack.json"]
+    },
+    {
+      "id": "preview-cost",
+      "kind": "deterministic",
+      "description": "Resolve prompts and planned calls without contacting a provider.",
+      "command": "sprite-generator --manifest <file> --dry-run",
+      "artifacts": ["resolved prompt and call plan"]
+    },
+    {
+      "id": "generate",
+      "kind": "model-assisted",
+      "description": "Generate independent sprites, identity-locked pose sheets, or a seed frame and continuous motion clip.",
+      "command": "sprite-generator <generate|pack|animate> [options]",
+      "artifacts": ["raw images or video"]
+    },
+    {
+      "id": "normalize",
+      "kind": "deterministic",
+      "description": "Remove connected backgrounds, detect frames, preserve uniform scale, apply declared anchors, and assemble sheets.",
+      "artifacts": ["normalized PNGs", "pack.json"]
+    },
+    {
+      "id": "select-frames",
+      "kind": "operator",
+      "description": "Inspect the contact sheet and select useful animation moments. This aesthetic judgment is intentionally not automated.",
+      "command": "sprite-generator animate sheet --framesDir <dir> --pick <frames>",
+      "artifacts": ["selected frame list", "animation sheet"]
+    },
+    {
+      "id": "verify",
+      "kind": "deterministic",
+      "description": "Check opaque content, spatial drift, visual identity, frame count, dimensions, and layout.",
+      "command": "sprite-generator verify <frame1> <frame2> [...more]",
+      "artifacts": ["verification result"]
+    },
+    {
+      "id": "render-proof",
+      "kind": "operator",
+      "description": "Render assets in a representative scene and inspect the pixels before accepting the pack.",
+      "artifacts": ["template screenshot or game capture"]
+    }
+  ],
+  "edges": [
+    { "from": "manifest", "to": "preview-cost", "when": "the asset contract is ready to inspect" },
+    { "from": "preview-cost", "to": "manifest", "when": "prompts, dimensions, or call count are wrong" },
+    { "from": "preview-cost", "to": "generate", "when": "the operator authorizes provider calls" },
+    { "from": "generate", "to": "normalize", "when": "provider output exists" },
+    { "from": "normalize", "to": "select-frames", "when": "continuous motion was harvested" },
+    { "from": "normalize", "to": "verify", "when": "a static or pose pack was assembled" },
+    { "from": "select-frames", "to": "verify", "when": "the operator commits the selected animation frames" },
+    { "from": "verify", "to": "manifest", "when": "a deterministic gate rejects" },
+    { "from": "verify", "to": "render-proof", "when": "all deterministic gates pass" },
+    { "from": "render-proof", "to": "manifest", "when": "the rendered asset is wrong despite static checks" }
+  ],
+  "authority": {
+    "model_may": ["produce raw image candidates", "produce a continuous motion candidate"],
+    "model_may_not": ["authorize spending", "choose final animation frames", "declare rendered acceptance", "write into a game repository"],
+    "operator_controls": ["manifest", "provider invocation", "frame selection", "render acceptance", "installation"]
+  },
+  "stop_conditions": [
+    "required provider credentials are absent",
+    "a dry run reveals an unintended prompt or call count",
+    "a raw asset is missing while generation is disabled",
+    "opaque content is below the minimum",
+    "identity or spatial drift exceeds the configured threshold",
+    "declared frame dimensions or count cannot be produced",
+    "the representative render does not show the intended asset"
+  ],
+  "gates": [
+    {
+      "id": "background-connectivity",
+      "accepts": "foreground content preserved while border-connected background becomes transparent",
+      "rejects": "an opaque provider background surviving as the sprite canvas",
+      "evidence": ["test/core.test.mjs: background cleanup removes the connected field and preserves the subject"]
+    },
+    {
+      "id": "identity-and-drift",
+      "accepts": "matching frames above the NCC threshold and inside the center-of-mass drift limit",
+      "rejects": "a deliberately displaced or visually unrelated frame",
+      "evidence": ["test/core.test.mjs: identity verification accepts a stable pair and rejects a displaced frame"]
+    },
+    {
+      "id": "pack-layout",
+      "accepts": "the declared frame count, dimensions, scale, and anchor",
+      "rejects": "missing raws or output that cannot satisfy the target geometry",
+      "evidence": ["test/core.test.mjs: pack pipeline assembles synthetic frames to exact target geometry"]
+    }
+  ],
+  "evidence": {
+    "deterministic_tests": "npm test",
+    "publish_boundary": "npm run leakscan",
+    "clean_consumer": "npm run test:consumer",
+    "full_preflight": "npm run preflight"
+  },
+  "observability": {
+    "current": "Dry runs print resolved prompts; pack emits pack.json; verification emits pass/fail measurements.",
+    "not_yet_claimed": "The package does not yet emit OpenTelemetry spans or signed action receipts."
+  }
+}
