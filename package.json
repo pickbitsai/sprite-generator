@@ -11,10 +11,11 @@
   "scripts": {
     "generate": "node generate.js",
     "preview": "node preview.js",
-    "test": "node --test test/*.test.mjs",
+    "test": "node --test test/core.test.mjs test/loop-contract.test.mjs",
     "test:consumer": "node test/consumer-install.mjs",
     "leakscan": "node test/leakscan.mjs",
-    "preflight": "npm run leakscan && npm test && npm run test:consumer",
+    "audit:prod": "npm audit --omit=dev --audit-level=high",
+    "preflight": "npm run leakscan && npm run audit:prod && npm test && npm run test:consumer",
     "prepublishOnly": "npm run preflight"
   },
   "files": [
@@ -50,13 +51,13 @@
     "visual-verification"
   ],
   "engines": {
-    "node": ">=20"
+    "node": ">=20.9.0"
   },
   "dependencies": {
     "@google/genai": "^1.49.0",
     "dotenv": "^17.4.1",
     "openai": "^4.85.0",
     "playwright-core": "^1.59.1",
-    "sharp": "^0.34.5"
+    "sharp": "^0.35.3"
   }
 }
