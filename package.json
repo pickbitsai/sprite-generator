@@ -1,7 +1,7 @@
 {
-  "name": "sprite-generator",
-  "version": "2.0.0",
-  "description": "Sprite generation toolkit: manifest-based asset generation, animation frame assembly, identity-locked image editing, and the Street Fury theme pipeline.",
+  "name": "@pickbitsai/sprite-generator",
+  "version": "2.1.0",
+  "description": "Manifest-driven sprite generation, identity-locked pose sheets, animation harvesting, and deterministic visual verification.",
   "type": "module",
   "license": "MIT",
   "bin": {
@@ -11,17 +11,24 @@
   "scripts": {
     "generate": "node generate.js",
     "preview": "node preview.js",
-    "theme": "node street-fury/generate-theme.js",
-    "theme:validate": "node street-fury/validate-theme.js"
+    "test": "node --test test/*.test.mjs",
+    "test:consumer": "node test/consumer-install.mjs",
+    "leakscan": "node test/leakscan.mjs",
+    "preflight": "npm run leakscan && npm test && npm run test:consumer",
+    "prepublishOnly": "npm run preflight"
   },
   "files": [
     "generate.js",
     "preview.js",
+    "contracts/",
+    "docs/",
     "lib/",
-    "street-fury/",
     "templates/",
+    "!templates/*/screenshot.png",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "SECURITY.md",
+    "loop.manifest.json"
   ],
   "repository": {
     "type": "git",
@@ -34,10 +41,17 @@
   "keywords": [
     "sprite",
     "generator",
+    "agentic-workflow",
     "openai",
+    "imagen",
     "game-assets",
-    "gpt-image"
+    "gpt-image",
+    "sprite-sheet",
+    "visual-verification"
   ],
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
     "@google/genai": "^1.49.0",
     "dotenv": "^17.4.1",

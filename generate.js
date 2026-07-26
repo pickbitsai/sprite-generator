@@ -22,6 +22,7 @@ import path from 'path';
 import { parseArgs } from 'util';
 import OpenAI from 'openai';
 import { GoogleGenAI } from '@google/genai';
+import { cleanBackgroundBuffer } from './lib/clean-bg.js';
 
 if (process.argv[2] === 'init') {
   const { runInit } = await import('./lib/init.js');
@@ -32,6 +33,18 @@ if (process.argv[2] === 'init') {
 if (process.argv[2] === 'pack') {
   const { runPackCli } = await import('./lib/pack-cli.js');
   await runPackCli(process.argv.slice(3));
+  process.exit(0);
+}
+
+if (process.argv[2] === 'animate') {
+  const { runAnimateCli } = await import('./lib/animate-cli.js');
+  await runAnimateCli(process.argv.slice(3));
+  process.exit(0);
+}
+
+if (process.argv[2] === 'verify') {
+  const { runVerifyCli } = await import('./lib/verify-cli.js');
+  await runVerifyCli(process.argv.slice(3));
   process.exit(0);
 }
 
@@ -210,6 +223,13 @@ async function generateSprite(asset, retries = 2) {
           n: 1,
           size: args.size,
           ...(model === 'dall-e-3' ? { quality: 'standard' } : {}),
+          // gpt-image-1 only: relying on "transparent background" in the
+          // prompt text is not reliable — confirmed 2026-07-20 on little-grove,
+          // where 42/42 generations with a style prompt containing exactly
+          // that phrase came back with an opaque colored background anyway.
+          // Passing the actual API parameter is the documented, enforceable
+          // way to get it. dall-e-3 doesn't support this param.
+          ...(model === 'gpt-image-1' ? { background: 'transparent' } : {}),
         });
         b64 = response.data[0].b64_json;
         if (!b64 && response.data[0].url) {
@@ -236,7 +256,17 @@ async function generateSprite(asset, retries = 2) {
       }
 
       if (!b64) throw new Error('No image bytes returned');
-      fs.writeFileSync(outPath, Buffer.from(b64, 'base64'));
+
+      // Confirmed 2026-07-20 on little-grove: neither backend reliably
+      // honors a "transparent background" prompt — openai (even with the
+      // background:'transparent' param above) and imagen both came back
+      // with an opaque solid/gradient background on every one of 42 test
+      // generations. pack-pipeline.js already solved this for the `pack`
+      // command with a corner-flood-fill; apply the same fix here rather
+      // than trusting the model. A no-op (returns the input untouched) if
+      // the corners are already transparent.
+      const buf = await cleanBackgroundBuffer(Buffer.from(b64, 'base64'));
+      fs.writeFileSync(outPath, buf);
 
       return { id: asset.id, status: 'ok', path: outPath };
     } catch (err) {
