@@ -1,0 +1,77 @@
+# Gate releases and public branch history; publishing workflows can use workflow_call.
+name: Release guard
+on:
+  push:
+    branches: ['**']
+    tags: ['v*']
+  pull_request:
+  release:
+    types: [published, created, prereleased]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Tag or commit to scan (defaults to the event ref)'
+        type: string
+        required: false
+  workflow_call:
+    inputs:
+      ref:
+        type: string
+        required: false
+    secrets:
+      RELEASE_GUARD_DENYLIST:
+        required: false
+permissions:
+  contents: read
+jobs:
+  release-guard:
+    runs-on: ubuntu-latest
+    env:
+      RELEASE_GUARD_DENYLIST: ${{ secrets.RELEASE_GUARD_DENYLIST }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ inputs.ref || github.event.release.tag_name || github.ref }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Read public mode
+        id: config
+        run: |
+          node --input-type=module <<'NODE'
+          import { appendFileSync, readFileSync } from 'node:fs';
+          let config = {};
+          try { config = JSON.parse(readFileSync('.release-guard.json', 'utf8')); } catch {}
+          appendFileSync(process.env.GITHUB_OUTPUT, 'public=' + (config?.public === true) + '\n');
+          NODE
+      - name: Scan public push or pull request
+        if: steps.config.outputs.public == 'true' && (github.event_name == 'pull_request' || (github.event_name == 'push' && startsWith(github.ref, 'refs/heads/')))
+        env:
+          RANGE_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+          RANGE_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          node scripts/release-guard.mjs scan --range "$RANGE_BASE..$RANGE_HEAD"
+          node scripts/release-guard.mjs scan --tracked HEAD
+      # HEAD is exactly the ref checked out above; never interpolate refs into shell code.
+      - name: Scan source, builds, and npm contents
+        if: github.event_name != 'pull_request' && (github.event_name != 'push' || startsWith(github.ref, 'refs/tags/'))
+        run: |
+          node scripts/release-guard.mjs scan --git-archive HEAD
+          node --input-type=module <<'NODE'
+          import { existsSync, readFileSync } from 'node:fs';
+          import { spawnSync } from 'node:child_process';
+          const run = (cmd, args = [], shell = false) => {
+            const r = spawnSync(cmd, args, { stdio: 'inherit', shell });
+            if (r.error || r.status !== 0) process.exit(r.status || 2);
+          };
+          const config = JSON.parse(readFileSync('.release-guard.json', 'utf8'));
+          if (config.buildCommand) {
+            run('npm', ['ci']);
+            run(config.buildCommand, [], true);
+            for (const dir of config.buildDirs || []) run('node', ['scripts/release-guard.mjs', 'scan', '--dir', dir]);
+          }
+          if (existsSync('package.json') && JSON.parse(readFileSync('package.json', 'utf8')).private !== true) {
+            run('node', ['scripts/release-guard.mjs', 'scan', '--npm-pack']);
+          }
+          NODE

@@ -1,0 +1,8 @@
+{
+  "forbid": [],
+  "allow": [],
+  "allowTerms": [],
+  "buildDirs": [],
+  "buildCommand": null,
+  "public": true
+}
