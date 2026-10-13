@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/pickbitsai/sprite-generator/main/contracts/loop-manifest.schema.json",
+  "title": "Executable loop manifest",
+  "description": "A project-local description of an executable agentic workflow. It is an inspection contract, not an orchestration standard.",
+  "type": "object",
+  "required": ["schema_version", "id", "title", "intent", "nodes", "edges", "authority", "stop_conditions", "gates", "evidence"],
+  "properties": {
+    "schema_version": { "const": "0.1" },
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "title": { "type": "string", "minLength": 1 },
+    "intent": { "type": "string", "minLength": 1 },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "description"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "kind": { "enum": ["deterministic", "model-assisted", "operator"] },
+          "description": { "type": "string" },
+          "command": { "type": "string" },
+          "artifacts": { "type": "array", "items": { "type": "string" } }
+        },
+        "additionalProperties": false
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to", "when"],
+        "properties": {
+          "from": { "type": "string" },
+          "to": { "type": "string" },
+          "when": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "authority": { "type": "object" },
+    "stop_conditions": { "type": "array", "items": { "type": "string" } },
+    "gates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "accepts", "rejects", "evidence"],
+        "properties": {
+          "id": { "type": "string" },
+          "accepts": { "type": "string" },
+          "rejects": { "type": "string" },
+          "evidence": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+        },
+        "additionalProperties": false
+      }
+    },
+    "evidence": { "type": "object" },
+    "observability": { "type": "object" }
+  },
+  "additionalProperties": false
+}

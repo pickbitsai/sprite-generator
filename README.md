@@ -1,19 +1,35 @@
 # Sprite Generator
 
-Generate game sprites with AI from a JSON manifest. Describe your assets, run the CLI, and get consistent illustrated PNGs — including sprite sheets with multiple angles and animation frames.
+Generate game sprites with AI. Three tools, pick the one that matches what you're actually making:
+
+| You need... | Use | Why |
+|---|---|---|
+| Independent static assets — icons, items, tiles, pickups | [`generate`](#getting-started) | One call per asset. Simplest path; identity consistency doesn't matter because nothing needs to match anything else. |
+| A character with several **consistent poses**, no motion | [`pack`](#pack--identity-locked-pose-sheets) | One edit call re-renders a reference character across N poses in a single image — identity is locked structurally, not hoped for across independent calls. |
+| A character with real **animation** — an attack windup, a death, a walk cycle | [`animate`](#animate--motion-not-just-poses) | A video model actually animates one seed frame; you harvest the in-between frames out of the result. The only method that produces real motion instead of a flashcard. |
+
+`generate` alone drifts the moment you ask it for multiple angles or animation frames of the *same*
+character — each call is independent, so nothing keeps frame 3 looking like frame 1. `pack` and `animate`
+exist specifically to fix that, in two different ways: `pack` locks identity by editing one reference
+image; `animate` locks it by construction, because every frame comes from the same continuous video.
 
 ## What You Need
 
-- **Node.js 18+**
-- **An OpenAI API key** with access to `gpt-image-1` (set as `OPENAI_API_KEY` environment variable)
+- **Node.js 20+**
+- **An OpenAI API key** with access to `gpt-image-1` (set as `OPENAI_API_KEY`) — used by `generate`, `pack`, and `animate`'s seed step
+- **A Replicate API token** (set as `REPLICATE_API_TOKEN`) — only if you use `animate`
+- **`ffmpeg` on PATH** — only if you use `animate`
 
 ## Getting Started
 
 ### 1. Install
 
 ```bash
-npm install pickbitsai/sprite-generator
+npm install --save-dev github:pickbitsai/sprite-generator
 ```
+
+The npm registry release will use `@pickbitsai/sprite-generator`. Until that
+release is published, the GitHub install above is the supported install path.
 
 ### 2. Create a manifest
 
@@ -25,7 +41,7 @@ npx sprite-generator init --template shmup          # copy a genre template
 npx sprite-generator init                           # basic 2-asset starter
 ```
 
-Templates ship with a proof-of-concept screenshot showing the generated sprites rendered in a representative game scene, so you can evaluate the style before committing credits. See [Templates](#templates) below.
+Each template has a proof-of-concept screenshot in the repository showing the generated sprites rendered in a representative game scene, so you can evaluate the style before committing credits. See [Templates](#templates) below.
 
 This creates a `manifest.json` in your project. Open it up — it has two key parts:
 
@@ -217,6 +233,141 @@ Use `--no-sheet` to generate individual frame PNGs without combining them into a
 OPENAI_API_KEY=sk-... npx sprite-generator --no-sheet
 ```
 
+## Pack — Identity-Locked Pose Sheets
+
+`generate`'s per-frame calls are independent — ask for "idle" and "attack" separately and you may get
+two different-looking characters. `pack` fixes this for characters that need several **consistent
+poses but no motion**: give it one reference image of your character, and it makes a single
+identity-locked edit call that re-renders that same character across every pose you asked for, laid out
+left-to-right in one sheet. Because it's one call editing one reference, there's nothing for the poses to
+drift *from*.
+
+It also does the boring-but-essential part `generate` doesn't: detects each frame's bounding box
+(handling AI sheets where frames touch, overlap, or aren't evenly spaced), rescales every frame by a
+single uniform factor so a run pose doesn't come out twice the size of an idle pose, and optionally runs
+an NCC identity check across the result.
+
+### Quick start
+
+Write a `game-pack.json` spec:
+
+```json
+{
+  "defaultStyle": "16-bit pixel art, vibrant saturated palette, crisp clean edges",
+  "referenceDir": "./references",
+  "assets": [
+    {
+      "id": "hero",
+      "description": "idle, walk, attack, hurt, death — side view, facing right",
+      "frames": 5,
+      "targetFrameWidth": 128,
+      "targetFrameHeight": 128,
+      "layout": "character",
+      "verifyIdentity": true
+    }
+  ]
+}
+```
+
+Drop a reference image at `references/hero.png` (any size), then:
+
+```bash
+OPENAI_API_KEY=sk-... npx sprite-generator pack --spec game-pack.json --output public/sprites
+```
+
+This writes `public/sprites/hero.png` (a 5-frame sheet, each cell exactly 128×128) and
+`public/sprites/pack.json` (frame count/dimensions/verification result per asset).
+
+### Spec fields (per asset)
+
+| Field | Required | Description |
+|---|---|---|
+| `id` | yes | Filename stem; also used to auto-resolve `<referenceDir>/<id>.png` |
+| `frames` | yes (for characters) | Poses laid out left-to-right |
+| `targetFrameWidth` / `targetFrameHeight` | yes (for characters) | Exact output cell size — the pipeline crops and rescales to hit this precisely |
+| `anchor` | no | `bottom` (default for `character`) \| `center` (default for tiles/pickups/projectiles) \| `top` |
+| `layout` | no | `character` \| `tiles` \| `pickups` \| `projectiles` \| `background` |
+| `verifyIdentity` | no | Run the NCC drift check (see [verify-identity.js](#verify-identityjs--frame-identity-checking)) across the output frames |
+| `reference` | no | Explicit reference image path (overrides `<referenceDir>/<id>.png`) |
+| `noReference` | no | Force plain text-to-image even if a reference would resolve |
+| `transparent` | no | Set `false` for backgrounds — flattens onto an opaque color instead of keeping alpha |
+| `padding` | no | Px margin inside each cell (default: 4 for characters, 0 for backgrounds) |
+
+### sprite-generator pack [options]
+
+| Option | Default | Description |
+|---|---|---|
+| `--spec <path>` | `./game-pack.json` | Pack spec JSON |
+| `--output <dir>` | `./output` | Where sheets + `pack.json` are written |
+| `--raw <dir>` | `<output>/raw` | Where ungenerated/regenerated raw AI output is cached |
+| `--skip-generate` | `false` | Skip the API entirely and reprocess whatever's already in `--raw` — use this to re-tune `targetFrameWidth`/`anchor`/`padding` without spending credits again |
+| `--asset <id>` | | Only process one asset from the spec |
+| `--edit-provider <name>` | `openai` | `openai` (gpt-image-1 `/images/edits`) or `gemini` (Gemini 2.5 Flash Image) — use `gemini` if your OpenAI org has edits gated but generations open |
+| `--edit-model <name>` | | Override the edit model for the chosen provider |
+| `--model` / `--size` / `--concurrency` | same as `generate` | |
+
+## Animate — Motion, Not Just Poses
+
+Neither `generate` nor `pack` can produce real **in-between motion** — a punch's anticipation and
+follow-through, the specific way a character crumples on death — because nothing ever asked a model to
+animate anything; both just generate a series of stills and hope they read as connected.
+
+`animate` asks a video model to actually animate one seed image, then lets you harvest whichever frames
+out of the result read as the poses you want. Identity drift is solved **by construction**: every frame
+comes from the same continuous video of the same character, so there's nothing for it to drift between.
+The tradeoff is cost and time — an image-to-video generation is dollars, not cents, and takes minutes —
+but you get real anticipation/smear/recovery frames a per-pose generator can't invent, and the one step
+that can't be automated (picking which frames to keep) costs nothing to redo if you pick badly.
+
+### Quick start — four stages, one human judgment call
+
+```bash
+# 1. One seed still on a flat magenta background (video models animate solid
+#    backgrounds far more reliably than transparent ones).
+OPENAI_API_KEY=sk-... npx sprite-generator animate seed \
+  --prompt "a lean cyber-ninja hero, matte black armor with glowing teal accents, 3/4 side view facing right, ready combat stance" \
+  --out seed.png
+
+# 2. Animate it. Describe the MOTION here, not the character — the seed
+#    image already carries identity; re-describing it invites drift.
+REPLICATE_API_TOKEN=r8_... npx sprite-generator animate motion \
+  --image seed.png --prompt "winds up and throws a heavy overhand punch" \
+  --out clip.mp4
+
+# 3. Explode the clip into numbered frames + a contact sheet.
+npx sprite-generator animate extract --video clip.mp4 --out frames/ --contact
+
+# --- LOOK AT frames/_contact.png. Pick the frame numbers that read as ---
+# --- anticipation / impact / follow-through at a glance. -----------------
+
+# 4. Chroma-key the background out and assemble your picks into a sheet.
+npx sprite-generator animate sheet \
+  --framesDir frames/ --pick 16,26,33,47 --out punch-sheet.png
+```
+
+### What makes this work (learned the hard way — don't skip these)
+
+- **Magenta, not transparency, for the seed you're about to animate.** Video models animate a solid
+  background far more reliably than an alpha one; `--bg transparent` is only for a standalone still,
+  not a frame headed into `animate motion`.
+- **The chroma-key despills the fringe automatically.** A raw magenta key leaves a purple/pink halo
+  around the character (compression softens the edge into a blend of the two colors); `animate sheet`
+  pulls the fringe back toward neutral rather than leaving it.
+- **Frames are bottom-anchored into a uniform cell**, not centered — characters share a ground line
+  instead of bobbing up and down between poses.
+- **Prompt the motion, not the character, in step 2.** The pixels already carry identity. Naming or
+  describing the character again is wasted at best; on a recognizable design it can also trip
+  IP-moderation on some providers.
+
+### sprite-generator animate <stage> [options]
+
+| Stage | Key options | Description |
+|---|---|---|
+| `seed` | `--prompt` (required), `--out`, `--bg magenta\|transparent`, `--size` | One still via gpt-image-1 |
+| `motion` | `--image` (required), `--prompt` (required), `--out`, `--model`, `--image-field`, `--neg`, `--extra '{"duration":5}'` | Image-to-video via Replicate. `--model` defaults to `kwaivgi/kling-v2.1`; any Replicate image-to-video model works if you set `--image-field` to match its input schema |
+| `extract` | `--video` (required), `--out`, `--fps`, `--contact`, `--cols`, `--thumb` | ffmpeg frame extraction. Requires `ffmpeg` on PATH. Omit `--fps` to keep every frame the clip has |
+| `sheet` | `--framesDir` (required), `--pick` (required), `--out`, `--bg`, `--t0`, `--t1`, `--crop`, `--pad` | Chroma-key + assemble. `--bg` defaults to `255,0,255` (matches `seed`'s magenta); `--crop x,y,w,h` trims the source frame before keying if the clip has letterboxing or a watermark region to discard |
+
 ## All CLI Options
 
 ### sprite-generator [init] [options]
@@ -242,6 +393,16 @@ OPENAI_API_KEY=sk-... npx sprite-generator --no-sheet
 | `--manifest <path>` | `./manifest.json` | Path to manifest JSON |
 | `--output <dir>` | `./output` | Directory with generated sprites |
 | `--port <n>` | `3333` | Server port |
+
+### sprite-generator verify <frame1> <frame2> [...]
+
+Standalone identity-drift check — wraps [`verify-identity.js`](#verify-identityjs--frame-identity-checking)
+as a CLI so you can gate frames from any source, not just this package's own pipelines. Exits non-zero
+on failure (drift, or too few opaque pixels in a frame).
+
+```bash
+npx sprite-generator verify output/character/hero/frames/front-walk-0.png output/character/hero/frames/front-walk-1.png
+```
 
 ## Reusable Libraries (`lib/`)
 
@@ -295,61 +456,9 @@ import { cleanBackground } from './lib/clean-bg.js';
 await cleanBackground('ai_output.png', 'clean.png', { threshold: 60 });
 ```
 
-## Theme Pipeline (`street-fury/`)
-
-A 35-stage pipeline for reskinning a base beat-em-up into a new visual theme. You supply (1) a short description of the theme in your own words and (2) your existing character reference sheets; the pipeline re-renders characters, enemies, bosses, and backgrounds in that theme while keeping the gameplay geometry identical. Generated art is driven entirely by your prompt + your reference art — no franchise art is ingested.
-
-The pipeline was built against a specific base game layout, so `GAME_ROOT` must point at a project structured the same way (characters + enemies + bosses + backgrounds in known directories). Most sprite-generator users will not need this — stick with `npx sprite-generator` for text-only asset packs.
-
-### Quick Start
-
-```bash
-# Point GAME_ROOT at a base game with the expected directory layout
-export GAME_ROOT=/path/to/base-game
-
-# Generate a new theme — describe it in your own words, any theme name you like
-npm run theme -- neon_samurai "A cyberpunk Edo city with chrome katanas and neon rain"
-
-# Resume a failed run
-npm run theme -- neon_samurai --from verify-gameplay
-
-# Validate an existing theme
-npm run theme:validate -- neon_samurai
-```
-
-### Pipeline Stages
-
-```
-concept → backgrounds → verify-backgrounds → references → characters →
-enemies → bosses → clean-frames → validate-frames → verify-consistency →
-verify-walk-cycle → assemble → verify-sheet-layout → build-config →
-verify-gameplay → verify-enemy-render → verify-boss-render →
-verify-pickups-render → verify-character-select → capture-character-select →
-capture-walks → capture-enemies → capture-bosses → capture-pickups →
-capture-backgrounds → capture-review-sheet → validate
-```
-
-### Key Features
-
-- **Self-healing verification gates** — when a stage fails, the orchestrator reruns upstream fix-it stages automatically before giving up
-- **Programmatic idle frames** — 1 AI frame + 3 pixel-shifted variants (zero drift)
-- **Identity-locked image editing** — Gemini or ComfyUI+IP-Adapter for consistent pose changes
-- **NCC identity verification** — catches visual drift on the character select screen
-- **Review sheet output** — single PNG showing character select + gameplay for visual sign-off
-- **Unified sprite sizing** — role-based target heights with automatic margin compensation for themed cells
-
-### Environment Variables
-
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `GAME_ROOT` | Yes | Path to the base game project |
-| `GEMINI_API_KEY` | Yes | Google AI API key for image generation |
-| `IMAGE_EDIT_PROVIDER` | No | `gemini` (default) or `comfyui` |
-| `COMFYUI_URL` | No | ComfyUI server URL for local generation |
-
 ## Templates
 
-Genre starter packs. Each one ships with a manifest, a standalone `demo.html` that renders the generated sprites in a representative scene, a `capture.js` Playwright script, and a committed `screenshot.png` proving the pack produces coherent output before you spend a cent.
+Genre starter packs. The installed package includes each manifest, a standalone `demo.html` that renders generated sprites in a representative scene, and a `capture.js` Playwright script. The repository also commits a `screenshot.png` for each template as visual proof without adding those large images to the npm tarball.
 
 | Template | Assets | What it covers |
 |---|---|---|
@@ -363,11 +472,40 @@ Genre starter packs. Each one ships with a manifest, a standalone `demo.html` th
 ```bash
 npx sprite-generator init --template <name>            # copy the manifest
 OPENAI_API_KEY=sk-... npx sprite-generator              # generate the sprites
-node node_modules/sprite-generator/templates/<name>/capture.js  # rebuild screenshot
+node node_modules/@pickbitsai/sprite-generator/templates/<name>/capture.js  # rebuild screenshot
 ```
 
 Want to make your own template? Copy an existing `templates/<name>/` directory, tweak the manifest, adjust the demo layout, and submit a PR.
 
+## Inspect the loop
+
+[`loop.manifest.json`](loop.manifest.json) is the machine-readable workflow:
+manifest and cost preview, model-assisted generation, deterministic background
+cleanup and packing, an explicit human frame-selection interrupt, identity and
+layout gates, and render proof. [docs/LOOP.md](docs/LOOP.md) is the human view.
+
+Every deterministic gate has a known-good and known-bad fixture. Run the same
+release boundary used in CI:
+
+```bash
+npm run preflight
+```
+
+That scans the exact npm publish set, runs the visual pipeline tests, packs the
+tarball, installs it into a blank project, initializes a template, and executes
+a dry run without sending an API request.
+
+## What is deliberately not included
+
+PickBits’ Asset Factory is the private production system that applies lessons
+across a catalog of games. It contains operational history, game adapters,
+provider operations, and the cross-catalog repair/harvest loop. It remains
+proprietary.
+
+This repository is its reusable public edge: generic generation, pose packing,
+animation harvesting, templates, and visual verification. No production
+manifest, game repository, account, or private asset corpus is required.
+
 ## License
 
-MIT
+MIT © Mark Pickering and PickBits.AI
